@@ -1,43 +1,19 @@
 import React, { Component } from 'react';
-import { Container, Card, CardItem, View, Text, Header, Title, Content, Button, Icon, Body } from 'native-base';
+import { View, Text } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import reducers from './reducers';
+import ContractionTimer from './ContractionTimer';
 
 class App extends Component {
   render() {
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
     return (
-      <Container>
-        <Header>
-          <Body>
-              <Title>StopWatch</Title>
-          </Body>
-        </Header>
-        <Content>
-          <View style={{
-            flex: 2,
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-            <Body>
-              <Text style={{ fontSize: 50 }}>00:00:00</Text>
-            </Body>
-          </View>
-          <View style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-            <Button iconLeft style={{ margin: 30 }}>
-              <Icon name='ios-play' />
-              <Text>Start</Text>
-            </Button>
-            <Button iconLeft style={{ margin: 30 }}>
-              <Icon name='ios-pause' />
-              <Text>Stop</Text>
-            </Button>
-          </View>
-        </Content>
-      </Container>
+      <Provider store={store}>
+        <ContractionTimer />
+      </Provider>
     );
   }
 }
