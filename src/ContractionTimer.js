@@ -1,61 +1,61 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+const formatTime = require('minutes-seconds-milliseconds');
+
 import {
   Container,
   View,
   Text,
+  H1,
+  H3,
   Header,
   Title,
   Content,
   Button,
   Icon,
-  Body
+  Body,
+  ListItem,
+  Right,
+  Left
 } from 'native-base';
-import { runTimer, startTimer, stopTimer, progressTimer } from './actions';
 
 class ContractionTimer extends Component {
-  onStartButtonPress() {
-    console.log('pressed start');
-    this.props.runTimer();
-  }
-
-  onStopButtonPress() {
-    stopTimer();
-  }
-
-  onTimerElapsed() {
-    this.props.progressTimer();
-  }
-
-  format() {
-    const pad = (time, length) => {
-      while (time.length < length) {
-         return `0${time}`;
-      }
-      return time;
+  constructor(props) {
+    super(props);
+    this.state = {
+      timeElapsed: null,
+      startTime: null,
+      running: false,
+      laps: []
     };
-
-    if (this.props.time) {
-      const formattedTime = new Date(this.props.time);
-      const m = pad(formattedTime.getMinutes().toString(), 2);
-      const s = pad(formattedTime.getSeconds().toString(), 2);
-      const ms = pad(formattedTime.getMilliseconds().toString(), 3);
-
-      return `${m}:${s}:${ms}`;
-    }
-
-    return '00:00:00';
   }
 
-  renderStartStop() {
-    if (this.props.running) {
+  header() {
+    return (
+      <Header>
+        <Body>
+            <Title>StopWatch</Title>
+        </Body>
+      </Header>
+    );
+  }
+
+  timerDisplay() {
+    return (
+      <H1 style={{ padding: 10 }}>
+        {formatTime(this.state.timeElapsed)}
+      </H1>
+    );
+  }
+
+  startStopButton() {
+    if (this.state.running) {
       return (
         <Button
           iconLeft
           rounded
           danger
           style={{ margin: 30 }}
-          onPress={this.onStopButtonPress.bind(this)}
+          onPress={this.handleStartStopPress.bind(this)}
         >
           <Icon name='ios-pause' />
           <Text>Stop</Text>
@@ -69,7 +69,7 @@ class ContractionTimer extends Component {
         rounded
         success
         style={{ margin: 30 }}
-        onPress={this.onStartButtonPress.bind(this)}
+        onPress={this.handleStartStopPress.bind(this)}
       >
         <Icon name='ios-play' />
         <Text>Start</Text>
@@ -77,33 +77,82 @@ class ContractionTimer extends Component {
     );
   }
 
-  renderTime() {
+  lapButton() {
+    console.log('pressed lap button');
     return (
-      <Text style={{ fontSize: 50 }}>{this.format(this.props.timeElapsed)}</Text>
+      <Button
+        iconLeft
+        rounded
+        style={{ margin: 30 }}
+        onPress={this.handleLapPress.bind(this)}
+      >
+        <Icon name='ios-stopwatch' />
+        <Text>Done</Text>
+      </Button>
     );
   }
 
-  render() {
-  return (
-    <Container>
-      <Header>
-        <Body>
-            <Title>StopWatch</Title>
-        </Body>
-      </Header>
+  laps() {
+    return this.state.laps.map((time, index) => {
+      return (
+        <Content key={index}>
+          <ListItem icon>
+            <Left>
+              <Text>Contraction #{index + 1}</Text>
+            </Left>
+            <Right>
+              <Text>Time: {formatTime(time)}</Text>
+            </Right>
+          </ListItem>
+          <ListItem>
+            <Body>
+              <Icon name="ios-sad" />
+            </Body>
+          </ListItem>
+        </Content>
+      );
+    });
+  }
+
+  handleStartStopPress() {
+    console.log(this.state);
+    if (this.state.running) {
+      clearInterval(this.interval);
+      this.setState({ running: false });
+      return;
+    }
+
+    this.setState({ startTime: new Date() });
+
+    this.interval = setInterval(() => {
+      this.setState({
+        timeElapsed: new Date() - this.state.startTime,
+        running: true
+      });
+    }, 30);
+  }
+
+  handleLapPress() {
+    console.log('handleLapPress');
+    const lap = this.state.timeElapsed;
+    this.setState({
+      startTime: new Date(),
+      laps: this.state.laps.concat([lap])
+    });
+  }
+
+  renderApp() {
+    return (
+      <Container>
+        {this.renderMainView()}
+      </Container>
+    );
+  }
+
+  renderMainView() {
+    return (
       <Content>
-        <View
-          style={{
-            flex: 2,
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Body>
-            {this.renderTime()}
-          </Body>
-        </View>
+        {this.header()}
         <View
           style={{
             flex: 1,
@@ -112,24 +161,42 @@ class ContractionTimer extends Component {
             alignItems: 'center',
           }}
         >
-        {this.renderStartStop()}
-      </View>
+          {this.timerDisplay()}
+        </View>
+        <View>
+          <Body
+            style={{
+              flex: 2,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            {this.startStopButton()}
+            {this.lapButton()}
+          </Body>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+         {this.laps()}
+        </View>
       </Content>
-    </Container>
+    );
+  }
+
+  render() {
+    return (
+      <Container>
+        {this.renderApp()}
+      </Container>
     );
   }
 }
 
-const mapStateToProps = (timer) => {
-  console.log(timer);
-  const { contractions, offset, running, timeElapsed, startTime } = timer;
-
-  return { contractions, offset, running, timeElapsed, startTime };
-};
-
-export default connect(mapStateToProps, {
-  runTimer,
-  startTimer,
-  progressTimer,
-  stopTimer
-})(ContractionTimer);
+export default ContractionTimer;
