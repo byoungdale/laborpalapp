@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { TouchableHighlight } from 'react-native';
+import { connect } from 'react-redux';
 import {
   Container,
   View,
   Text,
   H1,
-  H3,
-  Header,
-  Title,
   Content,
   Button,
   Icon,
@@ -16,48 +14,28 @@ import {
   Right,
   Left
 } from 'native-base';
+import { handleStartStopPress } from './actions';
+import AppHeader from './components/AppHeader';
 
 const formatTime = require('minutes-seconds-milliseconds');
 const Emoji = require('react-native-emoji').default;
 
 class ContractionTimer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      timeElapsed: null,
-      startTime: null,
-      running: false,
-      laps: []
-    };
-  }
-
-  header() {
-    return (
-      <Header>
-        <Body>
-            <Title>StopWatch</Title>
-        </Body>
-      </Header>
-    );
-  }
-
-  timerDisplay() {
-    return (
-      <H1 style={{ padding: 10 }}>
-        {formatTime(this.state.timeElapsed)}
-      </H1>
-    );
+  onStartStopPress() {
+    console.log(this.props);
+    const { running, startTime, currentTime } = this.props;
+    this.props.handleStartStopPress(running, startTime);
   }
 
   startStopButton() {
-    if (this.state.running) {
+    if (this.props.running) {
       return (
         <Button
           iconLeft
           rounded
           danger
           style={{ margin: 30 }}
-          onPress={this.handleStartStopPress.bind(this)}
+          onPress={this.onStartStopPress.bind(this)}
         >
           <Icon name='ios-pause' />
           <Text>Stop</Text>
@@ -71,7 +49,7 @@ class ContractionTimer extends Component {
         rounded
         success
         style={{ margin: 30 }}
-        onPress={this.handleStartStopPress.bind(this)}
+        onPress={this.onStartStopPress.bind(this)}
       >
         <Icon name='ios-play' />
         <Text>Start</Text>
@@ -95,7 +73,7 @@ class ContractionTimer extends Component {
   }
 
   laps() {
-    return this.state.laps.map((time, index) => {
+    return this.props.laps.map((time, index) => {
       return (
         <Content key={index}>
           <ListItem icon>
@@ -145,27 +123,9 @@ class ContractionTimer extends Component {
     });
   }
 
-  handleStartStopPress() {
-    console.log(this.state);
-    if (this.state.running) {
-      clearInterval(this.interval);
-      this.setState({ running: false });
-      return;
-    }
-
-    this.setState({ startTime: new Date() });
-
-    this.interval = setInterval(() => {
-      this.setState({
-        timeElapsed: new Date() - this.state.startTime,
-        running: true
-      });
-    }, 30);
-  }
-
   handleLapPress() {
     console.log('handleLapPress');
-    const lap = this.state.timeElapsed;
+    const lap = this.props.timeElapsed;
     this.setState({
       startTime: new Date(),
       laps: this.state.laps.concat([lap])
@@ -183,7 +143,7 @@ class ContractionTimer extends Component {
   renderMainView() {
     return (
       <Content>
-        {this.header()}
+        <AppHeader headerText='StopWatch' />
         <View
           style={{
             flex: 1,
@@ -192,7 +152,9 @@ class ContractionTimer extends Component {
             alignItems: 'center',
           }}
         >
-          {this.timerDisplay()}
+          <H1 style={{ padding: 10 }}>
+            {formatTime(this.props.timeElapsed)}
+          </H1>
         </View>
         <View>
           <Body
@@ -223,4 +185,10 @@ class ContractionTimer extends Component {
   }
 }
 
-export default ContractionTimer;
+const mapStateToProps = ({ timer }) => {
+  const { timeElapsed, startTime, running, laps } = timer;
+
+  return { timeElapsed, startTime, running, laps };
+};
+
+export default connect(mapStateToProps, { handleStartStopPress })(ContractionTimer);
