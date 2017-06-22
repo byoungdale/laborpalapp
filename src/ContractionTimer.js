@@ -22,8 +22,7 @@ const Emoji = require('react-native-emoji').default;
 
 class ContractionTimer extends Component {
   onStartStopPress() {
-    console.log(this.props);
-    const { running, startTime, currentTime } = this.props;
+    const { running, startTime } = this.props;
     this.props.handleStartStopPress(running, startTime);
   }
 
