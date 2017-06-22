@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-const formatTime = require('minutes-seconds-milliseconds');
-
+import { TouchableHighlight } from 'react-native';
 import {
   Container,
   View,
@@ -17,6 +16,9 @@ import {
   Right,
   Left
 } from 'native-base';
+
+const formatTime = require('minutes-seconds-milliseconds');
+const Emoji = require('react-native-emoji').default;
 
 class ContractionTimer extends Component {
   constructor(props) {
@@ -105,8 +107,37 @@ class ContractionTimer extends Component {
             </Right>
           </ListItem>
           <ListItem>
-            <Body>
-              <Icon name="ios-sad" />
+            <Text>Rate your contraction</Text>
+          </ListItem>
+          <ListItem>
+            <Body style={{
+                flex: 1,
+                flexDirection: 'row',
+            }}>
+              <Button light>
+                <Emoji name="relaxed" />
+              </Button>
+              <Button light>
+                <Emoji name="neutral_face" />
+              </Button>
+              <Button light>
+                <Emoji name="sweat" />
+              </Button>
+              <Button light>
+                <Emoji name="sleepy" />
+              </Button>
+              <Button light>
+                <Emoji name="fearful" />
+              </Button>
+              <Button light>
+                <Emoji name="sob" />
+              </Button>
+              <Button light>
+                <Emoji name="triumph" />
+              </Button>
+              <Button light>
+                <Emoji name="baby" />
+              </Button>
             </Body>
           </ListItem>
         </Content>
@@ -176,14 +207,7 @@ class ContractionTimer extends Component {
             {this.lapButton()}
           </Body>
         </View>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <View>
          {this.laps()}
         </View>
       </Content>
