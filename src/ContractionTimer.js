@@ -14,16 +14,26 @@ import {
   Right,
   Left
 } from 'native-base';
-import { handleStartStopPress } from './actions';
+import { handleStartPress, handleStopPress, handleContractionPress } from './actions';
 import AppHeader from './components/AppHeader';
 
 const formatTime = require('minutes-seconds-milliseconds');
 const Emoji = require('react-native-emoji').default;
 
 class ContractionTimer extends Component {
-  onStartStopPress() {
-    const { running, startTime } = this.props;
-    this.props.handleStartStopPress(running, startTime);
+  onStartPress() {
+    const { running, startTime, timeElapsed } = this.props;
+    this.props.handleStartPress(running, startTime, timeElapsed);
+  }
+
+  onStopPress() {
+    const { running } = this.props;
+    this.props.handleStopPress(running);
+  }
+
+  onContractionPress() {
+    const { timeElapsed, startTime, contractions } = this.props;
+    this.props.handleContractionPress(timeElapsed, startTime, contractions);
   }
 
   startStopButton() {
@@ -34,7 +44,7 @@ class ContractionTimer extends Component {
           rounded
           danger
           style={{ margin: 30 }}
-          onPress={this.onStartStopPress.bind(this)}
+          onPress={this.onStopPress.bind(this)}
         >
           <Icon name='ios-pause' />
           <Text>Stop</Text>
@@ -48,7 +58,7 @@ class ContractionTimer extends Component {
         rounded
         success
         style={{ margin: 30 }}
-        onPress={this.onStartStopPress.bind(this)}
+        onPress={this.onStartPress.bind(this)}
       >
         <Icon name='ios-play' />
         <Text>Start</Text>
@@ -56,14 +66,13 @@ class ContractionTimer extends Component {
     );
   }
 
-  lapButton() {
-    console.log('pressed lap button');
+  contractionButton() {
     return (
       <Button
         iconLeft
         rounded
         style={{ margin: 30 }}
-        onPress={this.handleLapPress.bind(this)}
+        onPress={this.onContractionPress.bind(this)}
       >
         <Icon name='ios-stopwatch' />
         <Text>Done</Text>
@@ -71,26 +80,35 @@ class ContractionTimer extends Component {
     );
   }
 
-  laps() {
-    return this.props.laps.map((time, index) => {
+  listContractions() {
+    return this.props.contractions.map((time, index) => {
       return (
         <Content key={index}>
           <ListItem icon>
             <Left>
               <Text>Contraction #{index + 1}</Text>
             </Left>
-            <Right>
+            <Body>
               <Text>Time: {formatTime(time)}</Text>
+            </Body>
+            <Right>
+              <Right>
+                <Button transparent danger>
+                  <Icon name="ios-close-circle-outline" />
+                </Button>
+              </Right>
             </Right>
           </ListItem>
           <ListItem>
             <Text>Rate your contraction</Text>
           </ListItem>
           <ListItem>
-            <Body style={{
+            <Body
+              style={{
                 flex: 1,
                 flexDirection: 'row',
-            }}>
+              }}
+            >
               <Button light>
                 <Emoji name="relaxed" />
               </Button>
@@ -119,15 +137,6 @@ class ContractionTimer extends Component {
           </ListItem>
         </Content>
       );
-    });
-  }
-
-  handleLapPress() {
-    console.log('handleLapPress');
-    const lap = this.props.timeElapsed;
-    this.setState({
-      startTime: new Date(),
-      laps: this.state.laps.concat([lap])
     });
   }
 
@@ -165,11 +174,11 @@ class ContractionTimer extends Component {
             }}
           >
             {this.startStopButton()}
-            {this.lapButton()}
+            {this.contractionButton()}
           </Body>
         </View>
         <View>
-         {this.laps()}
+         {this.listContractions()}
         </View>
       </Content>
     );
@@ -185,9 +194,13 @@ class ContractionTimer extends Component {
 }
 
 const mapStateToProps = ({ timer }) => {
-  const { timeElapsed, startTime, running, laps } = timer;
+  const { timeElapsed, startTime, running, contractions } = timer;
 
-  return { timeElapsed, startTime, running, laps };
+  return { timeElapsed, startTime, running, contractions };
 };
 
-export default connect(mapStateToProps, { handleStartStopPress })(ContractionTimer);
+export default connect(mapStateToProps, {
+  handleStartPress,
+  handleStopPress,
+  handleContractionPress
+})(ContractionTimer);
