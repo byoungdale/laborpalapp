@@ -6,18 +6,19 @@ import {
   CONTINUE_TIMER
 } from './types';
 
-export const startTimer = (dispatch) => {
+export const startTimer = (dispatch, timeElapsed) => {
   dispatch({
     type: START_PRESS,
     running: true,
-    startTime: new Date()
+    startTime: new Date(),
+    timeElapsed
   });
 };
 
-export const stopTimer = (dispatch) => {
+export const stopTimer = (dispatch, timeElapsed) => {
   dispatch({
     type: STOP_PRESS,
-    running: true
+    timeElapsed
   });
 };
 
@@ -44,15 +45,17 @@ export const addContraction = (dispatch, contraction, startTime, newContractions
   });
 };
 
-export const handleStopPress = (running) => {
+export const handleStopPress = (running, timeElapsed) => {
   return (dispatch) => {
-    clearInterval(this.interval);
-    stopTimer(dispatch);
+    this.clearInterval(this.interval);
+    stopTimer(dispatch, timeElapsed);
     return;
   };
 };
 
 export const handleStartPress = (running, startTime, timeElapsed) => {
+  console.log(startTime);
+  console.log(timeElapsed);
   return (dispatch) => {
     if (timeElapsed !== 0 && !running) {
       continueTimer(dispatch, timeElapsed);
@@ -60,9 +63,9 @@ export const handleStartPress = (running, startTime, timeElapsed) => {
 
     startTimer(dispatch);
 
-    this.interval = setInterval(() => {
+    this.interval = this.setInterval(() => {
       incrementTimer(dispatch, startTime);
-    }, 30);
+    }, 1000);
   };
 };
 
@@ -70,7 +73,7 @@ export const handleContractionPress = (timeElapsed, startTime, contractions) => 
   return (dispatch) => {
     const contraction = timeElapsed;
     const newContractionsList = contractions.concat([contraction]);
-    clearInterval(this.interval);
+    this.clearInterval(this.interval);
     addContraction(dispatch, contraction, startTime, newContractionsList);
   };
 };
