@@ -1,7 +1,6 @@
 import React from 'react';
-import { Text, Card, CardItem, Button, Body, Icon } from 'native-base';
-
-const Emoji = require('react-native-emoji').default;
+import { Text, Card, CardItem, Button, Icon } from 'native-base';
+import ContractionRatingSection from './ContractionRatingSection';
 const formatTime = require('minutes-seconds-milliseconds');
 
 const ContractionCard = (props) => {
@@ -24,41 +23,7 @@ const ContractionCard = (props) => {
       <CardItem>
         <Text>Rate your contraction</Text>
       </CardItem>
-      <CardItem>
-        <Body
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            alignItems: 'center'
-          }}
-        >
-          <Button light>
-            <Emoji name="relaxed" />
-          </Button>
-          <Button light>
-            <Emoji name="neutral_face" />
-          </Button>
-          <Button light>
-            <Emoji name="sweat" />
-          </Button>
-          <Button light>
-            <Emoji name="sleepy" />
-          </Button>
-          <Button light>
-            <Emoji name="fearful" />
-          </Button>
-          <Button light>
-            <Emoji name="sob" />
-          </Button>
-          <Button light>
-            <Emoji name="triumph" />
-          </Button>
-          <Button light>
-            <Emoji name="baby" />
-          </Button>
-        </Body>
-      </CardItem>
+      <ContractionRatingSection />
     </Card>
   );
 };
