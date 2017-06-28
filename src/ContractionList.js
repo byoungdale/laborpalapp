@@ -6,6 +6,7 @@ import {
   Content
 } from 'native-base';
 import ContractionCard from './components/ContractionCard';
+import { handleContractionDeletePress } from './actions/ContractionActions';
 
 class ContractionList extends Component {
   listContractions() {
@@ -33,4 +34,6 @@ const mapStateToProps = ({ timer }) => {
   return { contractions };
 };
 
-export default connect(mapStateToProps, {})(ContractionList);
+export default connect(mapStateToProps, {
+  handleContractionDeletePress
+})(ContractionList);

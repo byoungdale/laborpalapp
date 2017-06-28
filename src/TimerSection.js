@@ -22,7 +22,8 @@ class TimerSection extends Component {
       supportedOrientations: ['portrait', 'landscape'],
       text: 'Great job!',
       position: 'bottom',
-      buttonText: 'Thanks'
+      buttonText: 'Thanks',
+      duration: 1000
     });
     const { timeElapsed, startTime, contractions } = this.props;
     this.props.handleContractionPress(timeElapsed, startTime, contractions);

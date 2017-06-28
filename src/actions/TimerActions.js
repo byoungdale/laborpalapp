@@ -2,7 +2,6 @@ import {
   START_PRESS,
   STOP_PRESS,
   INCREMENT_TIME,
-  ADD_CONTRACTION,
   CONTINUE_TIMER
 } from './types';
 
@@ -36,15 +35,6 @@ export const continueTimer = (dispatch, timeElapsed) => {
   });
 };
 
-export const addContraction = (dispatch, contraction, startTime, newContractionsList) => {
-  dispatch({
-    type: ADD_CONTRACTION,
-    startTime: new Date(),
-    timeElapsed: new Date() - startTime,
-    contractions: newContractionsList,
-  });
-};
-
 export const handleStopPress = (running, timeElapsed) => {
   return (dispatch) => {
     this.clearInterval(this.interval);
@@ -54,8 +44,6 @@ export const handleStopPress = (running, timeElapsed) => {
 };
 
 export const handleStartPress = (running, startTime, timeElapsed) => {
-  console.log(startTime);
-  console.log(timeElapsed);
   return (dispatch) => {
     if (timeElapsed !== 0 && !running) {
       continueTimer(dispatch, timeElapsed);
@@ -66,14 +54,5 @@ export const handleStartPress = (running, startTime, timeElapsed) => {
     this.interval = this.setInterval(() => {
       incrementTimer(dispatch, startTime);
     }, 1000);
-  };
-};
-
-export const handleContractionPress = (timeElapsed, startTime, contractions) => {
-  return (dispatch) => {
-    const contraction = timeElapsed;
-    const newContractionsList = contractions.concat([contraction]);
-    this.clearInterval(this.interval);
-    addContraction(dispatch, contraction, startTime, newContractionsList);
   };
 };
