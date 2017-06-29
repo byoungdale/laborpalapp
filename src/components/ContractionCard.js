@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Card, CardItem, Button, Icon } from 'native-base';
+import { Text, Card, CardItem, Button, Icon, Body, List, ListItem, Left, Right } from 'native-base';
 import { connect } from 'react-redux';
 import { handleContractionDeletePress } from '../actions';
 import ContractionRatingSection from './ContractionRatingSection';
@@ -8,7 +8,6 @@ const formatTime = require('minutes-seconds-milliseconds');
 
 class ContractionCard extends Component {
   handleDeletePress() {
-    console.log(handleContractionDeletePress);
     const { contractions, index } = this.props;
     this.props.handleContractionDeletePress(contractions, index);
   }
@@ -24,12 +23,43 @@ class ContractionCard extends Component {
             alignItems: 'center',
           }}
         >
-          <Text>Contraction #{this.props.index + 1}</Text>
-          <Text>Time: {formatTime(this.props.time)}</Text>
+          <CardItem header><Text>Contraction</Text></CardItem>
           <Button transparent danger onPress={this.handleDeletePress.bind(this)}>
             <Icon name="ios-close-circle-outline" />
           </Button>
         </CardItem>
+        <List>
+          <ListItem icon>
+            <Left>
+              <Icon name="play" />
+            </Left>
+            <Right>
+              <Text>
+                {this.props.contraction.startStamp.toLocaleString()}
+              </Text>
+            </Right>
+          </ListItem>
+          <ListItem icon>
+            <Left>
+              <Icon name="hand" />
+            </Left>
+            <Right>
+              <Text>
+                {this.props.contraction.endStamp.toLocaleString()}
+              </Text>
+            </Right>
+          </ListItem>
+          <ListItem icon>
+            <Left>
+              <Icon name="clock" />
+            </Left>
+            <Right>
+              <Text>
+                {formatTime(this.props.contraction.timeElapsed)}
+              </Text>
+            </Right>
+          </ListItem>
+        </List>
         <CardItem header>
           <Text>Rate your contraction</Text>
         </CardItem>
@@ -45,9 +75,10 @@ class ContractionCard extends Component {
 }
 
 const mapStateToProps = ({ timer }) => {
-  const { contractions } = timer;
+  console.log('mapStateToProps: timer')
+  console.log(timer);
 
-  return { contractions };
+  return timer;
 };
 
 export default connect(mapStateToProps, {

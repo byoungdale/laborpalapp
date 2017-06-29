@@ -9,7 +9,7 @@ import {
 
 const INITIAL_STATE = {
   timeElapsed: 0,
-  startTime: new Date(),
+  startStamp: new Date(),
   running: false,
   contractions: []
 };
@@ -17,7 +17,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case START_PRESS:
-      return { ...state, running: true, startTime: action.startTime };
+      return { ...state, running: true, startStamp: action.startStamp };
     case STOP_PRESS:
       return { ...state, running: false };
     case INCREMENT_TIME:
@@ -28,7 +28,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         running: false,
-        startTime: new Date(),
+        startStamp: new Date(),
         timeElapsed: 0,
         contractions: action.contractions
       };

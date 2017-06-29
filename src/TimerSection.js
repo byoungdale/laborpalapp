@@ -8,8 +8,8 @@ import ContractionButton from './components/ContractionButton';
 
 class TimerSection extends Component {
   onStartPress() {
-    const { running, startTime, timeElapsed } = this.props;
-    this.props.handleStartPress(running, startTime, timeElapsed);
+    const { running, startStamp, timeElapsed } = this.props;
+    this.props.handleStartPress(running, startStamp, timeElapsed);
   }
 
   onStopPress() {
@@ -23,10 +23,10 @@ class TimerSection extends Component {
       text: 'Great job!',
       position: 'bottom',
       buttonText: 'Thanks',
-      duration: 1000
+      duration: 500
     });
-    const { timeElapsed, startTime, contractions } = this.props;
-    this.props.handleContractionPress(timeElapsed, startTime, contractions);
+    const { timeElapsed, startStamp, contractions } = this.props;
+    this.props.handleContractionPress(timeElapsed, startStamp, contractions);
   }
 
   render() {
@@ -57,9 +57,9 @@ class TimerSection extends Component {
 }
 
 const mapStateToProps = ({ timer }) => {
-  const { timeElapsed, startTime, running, contractions } = timer;
+  const { timeElapsed, startStamp, running, contractions } = timer;
 
-  return { timeElapsed, startTime, running, contractions };
+  return { timeElapsed, startStamp, running, contractions };
 };
 
 export default connect(mapStateToProps, {

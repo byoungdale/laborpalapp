@@ -10,10 +10,11 @@ import { handleContractionDeletePress } from './actions/ContractionActions';
 
 class ContractionList extends Component {
   listContractions() {
-    return this.props.contractions.map((time, index) => {
+    return this.props.contractions.reverse().map((contraction, index) => {
+      console.log(contraction);
       return (
         <Content key={index}>
-          <ContractionCard time={time} index={index} />
+          <ContractionCard contraction={contraction} index={index} />
         </Content>
       );
     });

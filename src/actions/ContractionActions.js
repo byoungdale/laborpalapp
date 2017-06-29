@@ -3,12 +3,12 @@ import {
   ADD_CONTRACTION
 } from './types';
 
-export const addContraction = (dispatch, contraction, startTime, newContractionsList) => {
+export const addContraction = (dispatch, contraction, startStamp, newContractionsList) => {
   dispatch({
     type: ADD_CONTRACTION,
-    startTime: new Date(),
-    timeElapsed: new Date() - startTime,
-    contractions: newContractionsList,
+    startStamp: new Date(),
+    timeElapsed: new Date() - startStamp,
+    contractions: newContractionsList
   });
 };
 
@@ -19,16 +19,22 @@ export const deleteContraction = (dispatch, newContractionsList) => {
   });
 };
 
-export const handleContractionPress = (timeElapsed, startTime, contractions) => {
+export const handleContractionPress = (timeElapsed, startStamp, contractions) => {
   return (dispatch) => {
-    const contraction = timeElapsed;
+    const contraction = {
+      timeElapsed,
+      startStamp,
+      endStamp: new Date(),
+      note: null,
+    };
     const newContractionsList = contractions.concat([contraction]);
     this.clearInterval(this.interval);
-    addContraction(dispatch, contraction, startTime, newContractionsList);
+    addContraction(dispatch, contraction, startStamp, newContractionsList);
   };
 };
 
 export const handleContractionDeletePress = (contractions, index) => {
+  console.log(contractions, index);
   const newContractionsList = contractions.slice(index + 1).concat(contractions.slice(0, index));
   return (dispatch) => {
     deleteContraction(dispatch, newContractionsList);

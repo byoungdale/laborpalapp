@@ -9,7 +9,7 @@ export const startTimer = (dispatch, timeElapsed) => {
   dispatch({
     type: START_PRESS,
     running: true,
-    startTime: new Date(),
+    startStamp: new Date(),
     timeElapsed
   });
 };
@@ -21,10 +21,10 @@ export const stopTimer = (dispatch, timeElapsed) => {
   });
 };
 
-export const incrementTimer = (dispatch, startTime) => {
+export const incrementTimer = (dispatch, startStamp) => {
   dispatch({
     type: INCREMENT_TIME,
-    timeElapsed: new Date() - startTime
+    timeElapsed: new Date() - startStamp
   });
 };
 
@@ -43,7 +43,7 @@ export const handleStopPress = (running, timeElapsed) => {
   };
 };
 
-export const handleStartPress = (running, startTime, timeElapsed) => {
+export const handleStartPress = (running, startStamp, timeElapsed) => {
   return (dispatch) => {
     if (timeElapsed !== 0 && !running) {
       continueTimer(dispatch, timeElapsed);
@@ -52,7 +52,7 @@ export const handleStartPress = (running, startTime, timeElapsed) => {
     startTimer(dispatch);
 
     this.interval = this.setInterval(() => {
-      incrementTimer(dispatch, startTime);
+      incrementTimer(dispatch, startStamp);
     }, 1000);
   };
 };
