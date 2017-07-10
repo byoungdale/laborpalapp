@@ -1,18 +1,22 @@
 import React from 'react';
-import { Scene, Router, Actions } from 'react-native-router-flux';
-import ContractionStopWatch from './ContractionStopWatch';
-import ContractionNote from './components/ContractionNote';
+import { Scene, Router } from 'react-native-router-flux';
+import NoteSection from './NoteSection';
+import TimerSection from './TimerSection';
 
 const RouterComponent = () => {
   return (
     <Router sceneStyle={{ paddingTop: 60 }}>
       <Scene
         key="stopwatch"
-        component={ContractionStopWatch}
-        title="Contraction StopWatch"
+        component={TimerSection}
+        title="StopWatch"
         initial
       />
-      <Scene key="note" component={ContractionNote} title="Leave Note" />
+      <Scene
+        key="note"
+        component={NoteSection}
+        title="Note"
+      />
     </Router>
   );
 };

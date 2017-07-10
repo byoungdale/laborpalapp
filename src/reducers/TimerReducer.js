@@ -1,10 +1,7 @@
 import {
   START_PRESS,
   STOP_PRESS,
-  INCREMENT_TIME,
-  ADD_CONTRACTION,
-  CONTINUE_TIMER,
-  DELETE_CONTRACTION
+  INCREMENT_TIME
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -22,21 +19,6 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, running: false };
     case INCREMENT_TIME:
       return { ...state, running: true, timeElapsed: action.timeElapsed };
-    case CONTINUE_TIMER:
-      return { ...state, running: true, timeElapsed: action.timeElapsed };
-    case ADD_CONTRACTION:
-      return {
-        ...state,
-        running: false,
-        startStamp: new Date(),
-        timeElapsed: 0,
-        contractions: action.contractions
-      };
-    case DELETE_CONTRACTION:
-      return {
-        ...state,
-        contractions: action.contractions
-      };
     default:
       return state;
   }

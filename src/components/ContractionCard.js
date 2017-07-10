@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import { Text, Card, CardItem, Button, Icon, Body, List, ListItem, Left, Right } from 'native-base';
+import {
+  Text,
+  Card,
+  CardItem,
+  Button,
+  Icon,
+  List,
+  ListItem,
+  Left,
+  Right }
+from 'native-base';
 import { connect } from 'react-redux';
 import { handleContractionDeletePress } from '../actions';
 import ContractionRatingSection from './ContractionRatingSection';
@@ -24,9 +34,11 @@ class ContractionCard extends Component {
           }}
         >
           <CardItem header><Text>Contraction</Text></CardItem>
-          <Button transparent danger onPress={this.handleDeletePress.bind(this)}>
-            <Icon name="ios-close-circle-outline" />
-          </Button>
+          <CardItem>
+            <Button transparent danger onPress={this.handleDeletePress.bind(this)}>
+              <Icon name="ios-close-circle-outline" />
+            </Button>
+          </CardItem>
         </CardItem>
         <List>
           <ListItem icon>
@@ -75,9 +87,6 @@ class ContractionCard extends Component {
 }
 
 const mapStateToProps = ({ timer }) => {
-  console.log('mapStateToProps: timer')
-  console.log(timer);
-
   return timer;
 };
 

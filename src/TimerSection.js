@@ -1,32 +1,19 @@
 import React, { Component } from 'react';
-import { Content, Body, View, Toast } from 'native-base';
+import { Content, Body, View } from 'native-base';
 import { connect } from 'react-redux';
-import { handleStartPress, handleStopPress, handleContractionPress } from './actions';
+import { handleStartPress, handleStopPress } from './actions';
 import TimerCard from './components/TimerCard';
 import StartStopButton from './components/StartStopButton';
-import ContractionButton from './components/ContractionButton';
 
 class TimerSection extends Component {
   onStartPress() {
-    const { running, startStamp, timeElapsed } = this.props;
-    this.props.handleStartPress(running, startStamp, timeElapsed);
+    const { running, startStamp } = this.props;
+    this.props.handleStartPress(running, startStamp);
   }
 
   onStopPress() {
     const { running, timeElapsed } = this.props;
     this.props.handleStopPress(running, timeElapsed);
-  }
-
-  onContractionPress() {
-    Toast.show({
-      supportedOrientations: ['portrait', 'landscape'],
-      text: 'Great job!',
-      position: 'bottom',
-      buttonText: 'Thanks',
-      duration: 500
-    });
-    const { timeElapsed, startStamp, contractions } = this.props;
-    this.props.handleContractionPress(timeElapsed, startStamp, contractions);
   }
 
   render() {
@@ -48,7 +35,6 @@ class TimerSection extends Component {
               this.onStopPress.bind(this) :
               this.onStartPress.bind(this)}
           />
-          <ContractionButton onPress={this.onContractionPress.bind(this)} />
           </Body>
         </View>
       </Content>
@@ -57,13 +43,12 @@ class TimerSection extends Component {
 }
 
 const mapStateToProps = ({ timer }) => {
-  const { timeElapsed, startStamp, running, contractions } = timer;
+  const { timeElapsed, startStamp, endStamp, running } = timer;
 
-  return { timeElapsed, startStamp, running, contractions };
+  return { timeElapsed, startStamp, endStamp, running };
 };
 
 export default connect(mapStateToProps, {
   handleStartPress,
-  handleStopPress,
-  handleContractionPress
+  handleStopPress
 })(TimerSection);

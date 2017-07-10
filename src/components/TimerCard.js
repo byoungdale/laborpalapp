@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, H1 } from 'native-base';
-const Emoji = require('react-native-emoji').default;
+import { Content, View, H1, Button, Text } from 'native-base';
+
 const formatTime = require('minutes-seconds-milliseconds');
 
 const TimerCard = (props) => {
@@ -13,6 +13,16 @@ const TimerCard = (props) => {
         alignItems: 'center',
       }}
     >
+      <Button
+        transparent
+        style={{
+          position: 'absolute',
+          right: 0,
+          top: 0
+        }}
+      >
+        <Text>Reset</Text>
+      </Button>
       <H1 style={{ padding: 10 }}>
         {formatTime(props.timeElapsed)}
       </H1>

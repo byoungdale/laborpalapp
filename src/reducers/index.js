@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import StopWatchReducer from './StopWatchReducer';
+import TimerReducer from './TimerReducer';
 
 export default combineReducers({
-  timer: StopWatchReducer
+  timer: TimerReducer
 });

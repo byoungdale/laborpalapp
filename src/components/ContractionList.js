@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   Container,
-  View,
   Content
 } from 'native-base';
-import ContractionCard from './components/ContractionCard';
+import Timeline from 'react-native-timeline-listview';
+import ContractionCard from './ContractionCard';
 import { handleContractionDeletePress } from './actions/ContractionActions';
 
 class ContractionList extends Component {
@@ -22,9 +22,13 @@ class ContractionList extends Component {
 
   render() {
     return (
-      <View>
-       {this.listContractions()}
-      </View>
+      <Container>
+        <Content>
+          <Timeline
+            data={this.props.contractions}
+          />
+        </Content>
+      </Container>
     );
   }
 }

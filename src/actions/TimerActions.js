@@ -1,8 +1,9 @@
+import { Actions } from 'react-native-router-flux';
+
 import {
   START_PRESS,
   STOP_PRESS,
-  INCREMENT_TIME,
-  CONTINUE_TIMER
+  INCREMENT_TIME
 } from './types';
 
 export const startTimer = (dispatch, timeElapsed) => {
@@ -19,19 +20,14 @@ export const stopTimer = (dispatch, timeElapsed) => {
     type: STOP_PRESS,
     timeElapsed
   });
+
+  Actions.note();
 };
 
 export const incrementTimer = (dispatch, startStamp) => {
   dispatch({
     type: INCREMENT_TIME,
     timeElapsed: new Date() - startStamp
-  });
-};
-
-export const continueTimer = (dispatch, timeElapsed) => {
-  dispatch({
-    type: CONTINUE_TIMER,
-    timeElapsed
   });
 };
 
@@ -43,12 +39,8 @@ export const handleStopPress = (running, timeElapsed) => {
   };
 };
 
-export const handleStartPress = (running, startStamp, timeElapsed) => {
+export const handleStartPress = (running, startStamp) => {
   return (dispatch) => {
-    if (timeElapsed !== 0 && !running) {
-      continueTimer(dispatch, timeElapsed);
-    }
-
     startTimer(dispatch);
 
     this.interval = this.setInterval(() => {
