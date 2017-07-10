@@ -1,17 +1,14 @@
-import { Actions } from 'react-native-router-flux';
-
 import {
   START_PRESS,
   STOP_PRESS,
   INCREMENT_TIME
 } from './types';
 
-export const startTimer = (dispatch, timeElapsed) => {
+export const startTimer = (dispatch) => {
   dispatch({
     type: START_PRESS,
     running: true,
-    startStamp: new Date(),
-    timeElapsed
+    startStamp: new Date()
   });
 };
 
@@ -20,8 +17,6 @@ export const stopTimer = (dispatch, timeElapsed) => {
     type: STOP_PRESS,
     timeElapsed
   });
-
-  Actions.note();
 };
 
 export const incrementTimer = (dispatch, startStamp) => {
@@ -31,7 +26,7 @@ export const incrementTimer = (dispatch, startStamp) => {
   });
 };
 
-export const handleStopPress = (running, timeElapsed) => {
+export const handleStopPress = (timeElapsed) => {
   return (dispatch) => {
     this.clearInterval(this.interval);
     stopTimer(dispatch, timeElapsed);

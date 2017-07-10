@@ -8,7 +8,6 @@ const INITIAL_STATE = {
   timeElapsed: 0,
   startStamp: new Date(),
   running: false,
-  contractions: []
 };
 
 export default (state = INITIAL_STATE, action) => {

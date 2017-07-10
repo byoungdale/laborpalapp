@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import {
   Container,
-  Content,
-  Text
+  Content
 } from 'native-base';
+import ContractionCard from './components/ContractionCard';
 
-class Note extends Component {
+class NoteSection extends Component {
   render() {
+    console.log('Note');
+    console.log(this.props.contraction);
     return (
       <Container>
         <Content>
-          <Text>Hello</Text>
+          <ContractionCard contraction={this.props.contraction} />
         </Content>
       </Container>
     );
   }
 }
 
-export default Note;
+export default NoteSection;

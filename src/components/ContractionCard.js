@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   Text,
+  H1,
   Card,
   CardItem,
   Button,
@@ -10,18 +11,12 @@ import {
   Left,
   Right }
 from 'native-base';
-import { connect } from 'react-redux';
-import { handleContractionDeletePress } from '../actions';
 import ContractionRatingSection from './ContractionRatingSection';
+import ContractionNote from './ContractionNote';
 
 const formatTime = require('minutes-seconds-milliseconds');
 
 class ContractionCard extends Component {
-  handleDeletePress() {
-    const { contractions, index } = this.props;
-    this.props.handleContractionDeletePress(contractions, index);
-  }
-
   render() {
     return (
       <Card>
@@ -35,7 +30,7 @@ class ContractionCard extends Component {
         >
           <CardItem header><Text>Contraction</Text></CardItem>
           <CardItem>
-            <Button transparent danger onPress={this.handleDeletePress.bind(this)}>
+            <Button transparent danger>
               <Icon name="ios-close-circle-outline" />
             </Button>
           </CardItem>
@@ -76,20 +71,13 @@ class ContractionCard extends Component {
           <Text>Rate your contraction</Text>
         </CardItem>
         <ContractionRatingSection />
-        <Button
-          transparent
-        >
-          <Text>Leave a note</Text>
-        </Button>
+          <H1>
+            <Text>Leave a note</Text>
+          </H1>
+        <ContractionNote />
       </Card>
     );
   }
 }
 
-const mapStateToProps = ({ timer }) => {
-  return timer;
-};
-
-export default connect(mapStateToProps, {
-  handleContractionDeletePress
-})(ContractionCard);
+export default ContractionCard;
