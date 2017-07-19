@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import TimerReducer from './TimerReducer';
-import ContractionReducer from './ContractionReducer';
+import ContractionListReducer from './ContractionListReducer';
 
 export default combineReducers({
   timer: TimerReducer,
-  contractionManager: ContractionReducer
+  contractionListManager: ContractionListReducer,
 });

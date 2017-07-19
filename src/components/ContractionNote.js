@@ -1,16 +1,42 @@
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { Container, Content, Input } from 'native-base';
+import { Input, Item, Card, CardItem, Text, Button } from 'native-base';
 
 class ContractionNote extends Component {
+
   render() {
     return (
-      <Container>
-        <Content>
-          <Input placeholder='e.g. contractions are getting closer together!' />
-        </Content>
-      </Container>
+      <Card>
+        <CardItem header><Text>Leave a note</Text></CardItem>
+        <CardItem>
+          <Item rounded>
+            <Input
+              placeholder='e.g. contractions are getting closer together!'
+              onChangeText={(input) => { console.log(input); }}
+            />
+          </Item>
+        </CardItem>
+        <CardItem>
+          <Button
+            transparent
+            style={{
+              position: 'absolute',
+              right: 0,
+              bottom: 0
+            }}
+          >
+            <Text>Save</Text>
+          </Button>
+        </CardItem>
+      </Card>
     );
   }
 }
 
-export default ContractionNote;
+const mapStateToProps = ({ contractionListManager }) => {
+  const { contractions } = contractionListManager;
+  return { contractions };
+};
+
+export default connect(mapStateToProps, {
+})(ContractionNote);

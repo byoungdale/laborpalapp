@@ -2,7 +2,8 @@ import { Actions } from 'react-native-router-flux';
 
 import {
   DELETE_CONTRACTION,
-  ADD_CONTRACTION
+  ADD_CONTRACTION,
+  UPDATE_CONTRACTION_LIST
 } from './types';
 
 export const addContraction = (dispatch, contraction, startStamp, newContractionsList) => {
@@ -12,8 +13,6 @@ export const addContraction = (dispatch, contraction, startStamp, newContraction
     timeElapsed: new Date() - startStamp,
     contractions: newContractionsList
   });
-  console.log('addContraction');
-  console.log(contraction);
   Actions.note({ contraction });
 };
 
@@ -22,15 +21,27 @@ export const deleteContraction = (dispatch, newContractionsList) => {
     type: DELETE_CONTRACTION,
     contractions: newContractionsList
   });
+
+  Actions.stopwatch();
+};
+
+export const updateContraction = (dispatch, newContractionsList) => {
+  dispatch({
+    type: UPDATE_CONTRACTION_LIST,
+    contractions: newContractionsList
+  });
 };
 
 export const handleAddingContraction = (startStamp, timeElapsed, contractions) => {
   return (dispatch) => {
     const contraction = {
+      id: contractions.length + 1,
       timeElapsed,
       startStamp,
       endStamp: new Date(),
+      rating: null,
       note: null,
+      encouragement: false
     };
     const newContractionsList = contractions.concat([contraction]);
     this.clearInterval(this.interval);
@@ -38,10 +49,28 @@ export const handleAddingContraction = (startStamp, timeElapsed, contractions) =
   };
 };
 
-export const handleContractionDeletePress = (contractions, index) => {
-  console.log(contractions, index);
-  const newContractionsList = contractions.slice(index + 1).concat(contractions.slice(0, index));
+export const handleContractionDeletePress = (contractions, id) => {
+  const newContractionsList = contractions.filter((contraction) => {
+    return contraction.id !== id;
+  });
   return (dispatch) => {
     deleteContraction(dispatch, newContractionsList);
   };
+};
+
+export const handleContractionRatingUpdate = (contractions, id, ratingName) => {
+  const newContractionsList = contractions.map((contraction) => {
+    return contraction.id === id ? { ...contraction, rating: ratingName } : contraction;
+  });
+  return (dispatch) => {
+    updateContraction(dispatch, newContractionsList);
+  };
+};
+
+export const handleContractionNoteUpdate = () => {
+
+};
+
+export const showEncouragement = () => {
+
 };

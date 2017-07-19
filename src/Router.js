@@ -1,6 +1,6 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
-import NoteSection from './NoteSection';
+import ContractionSection from './ContractionSection';
 import TimerSection from './TimerSection';
 
 const RouterComponent = () => {
@@ -14,7 +14,7 @@ const RouterComponent = () => {
       />
       <Scene
         key="note"
-        component={NoteSection}
+        component={ContractionSection}
         title="Note"
       />
     </Router>

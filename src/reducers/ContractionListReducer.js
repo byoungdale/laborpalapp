@@ -1,6 +1,7 @@
 import {
   ADD_CONTRACTION,
-  DELETE_CONTRACTION
+  DELETE_CONTRACTION,
+  UPDATE_CONTRACTION_LIST
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -19,7 +20,11 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         contractions: action.contractions
       };
-
+    case UPDATE_CONTRACTION_LIST:
+      return {
+        ...state,
+        contractions: action.contractions
+      };
     default:
       return state;
   }

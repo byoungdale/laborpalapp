@@ -12,8 +12,6 @@ class TimerSection extends Component {
   }
 
   onStopPress() {
-    console.log('onStopPress');
-    console.log(this.props);
     const { timeElapsed, startStamp, contractions } = this.props;
     this.props.handleStopPress(timeElapsed);
     this.props.handleAddingContraction(startStamp, timeElapsed, contractions);
@@ -45,12 +43,9 @@ class TimerSection extends Component {
   }
 }
 
-const mapStateToProps = ({ timer, contractionManager }) => {
-  console.log('TimerSection: contraction_manager');
-  console.log(contractionManager);
+const mapStateToProps = ({ timer, contractionListManager }) => {
   const { timeElapsed, startStamp, endStamp, running } = timer;
-  const { contractions } = contractionManager;
-  console.log(contractions);
+  const { contractions } = contractionListManager;
 
   return { timeElapsed, startStamp, endStamp, running, contractions };
 };

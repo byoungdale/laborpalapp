@@ -1,45 +1,72 @@
-import React from 'react';
-import { CardItem, Button, Body} from 'native-base';
+import React, { Component } from 'react';
+import { Card, CardItem, Button, Body, Text } from 'native-base';
+import { connect } from 'react-redux';
+import { handleContractionRatingUpdate } from '../actions/ContractionListActions';
+
 const Emoji = require('react-native-emoji').default;
 
-const ContractionRatingSection = () => {
-  return (
-    <CardItem>
-      <Body
-        style={{
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          alignItems: 'center'
-        }}
-      >
-        <Button light>
-          <Emoji name="relaxed" />
-        </Button>
-        <Button light>
-          <Emoji name="neutral_face" />
-        </Button>
-        <Button light>
-          <Emoji name="sweat" />
-        </Button>
-        <Button light>
-          <Emoji name="sleepy" />
-        </Button>
-        <Button light>
-          <Emoji name="fearful" />
-        </Button>
-        <Button light>
-          <Emoji name="sob" />
-        </Button>
-        <Button light>
-          <Emoji name="triumph" />
-        </Button>
-        <Button light>
-          <Emoji name="baby" />
-        </Button>
-      </Body>
-    </CardItem>
-  );
+class ContractionRatingSection extends Component {
+  onRatingPress(ratingName) {
+    const contractionID = this.props.contractions.length;
+    this.props.handleContractionRatingUpdate(this.props.contractions, contractionID, ratingName);
+  }
+
+  render() {
+    return (
+      <Card>
+        <CardItem header>
+          <Text>Rate your contraction</Text>
+        </CardItem>
+        <CardItem>
+          <Body
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              alignItems: 'center'
+            }}
+          >
+            <Button
+              transparent
+              onPress={this.onRatingPress.bind(this, 'relaxed')}
+            >
+              <Emoji name="relaxed" />
+            </Button>
+            <Button transparent>
+              <Emoji name="neutral_face" />
+            </Button>
+            <Button transparent>
+              <Emoji name="sweat" />
+            </Button>
+            <Button transparent>
+              <Emoji name="sleepy" />
+            </Button>
+            <Button transparent>
+              <Emoji name="fearful" />
+            </Button>
+            <Button transparent>
+              <Emoji name="sob" />
+            </Button>
+            <Button transparent>
+              <Emoji name="triumph" />
+            </Button>
+            <Button transparent>
+              <Emoji name="baby" />
+            </Button>
+          </Body>
+        </CardItem>
+      </Card>
+    );
+  }
+}
+
+const mapStateToProps = ({ contractionListManager }) => {
+  console.log('ContractionRating: mapStateToProps: contractions');
+  const { contractions } = contractionListManager;
+  console.log(contractions);
+  return { contractions };
 };
 
-export default ContractionRatingSection;
+export default connect(mapStateToProps, {
+  handleContractionRatingUpdate
+})(ContractionRatingSection);

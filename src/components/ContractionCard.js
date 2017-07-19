@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   Text,
-  H1,
   Card,
   CardItem,
   Button,
@@ -11,12 +10,19 @@ import {
   Left,
   Right }
 from 'native-base';
+import { connect } from 'react-redux';
+import { handleContractionDeletePress } from '../actions';
 import ContractionRatingSection from './ContractionRatingSection';
 import ContractionNote from './ContractionNote';
 
 const formatTime = require('minutes-seconds-milliseconds');
 
 class ContractionCard extends Component {
+  onDeletePress() {
+    const { contractions, contraction } = this.props;
+    this.props.handleContractionDeletePress(contractions, contraction.id);
+  }
+
   render() {
     return (
       <Card>
@@ -28,9 +34,13 @@ class ContractionCard extends Component {
             alignItems: 'center',
           }}
         >
-          <CardItem header><Text>Contraction</Text></CardItem>
+          <CardItem header><Text>Contraction {this.props.contraction.id}</Text></CardItem>
           <CardItem>
-            <Button transparent danger>
+            <Button
+              transparent
+              danger
+              onPress={this.onDeletePress.bind(this)}
+            >
               <Icon name="ios-close-circle-outline" />
             </Button>
           </CardItem>
@@ -67,17 +77,20 @@ class ContractionCard extends Component {
             </Right>
           </ListItem>
         </List>
-        <CardItem header>
-          <Text>Rate your contraction</Text>
-        </CardItem>
         <ContractionRatingSection />
-          <H1>
-            <Text>Leave a note</Text>
-          </H1>
         <ContractionNote />
       </Card>
     );
   }
 }
 
-export default ContractionCard;
+const mapStateToProps = ({ contractionListManager }) => {
+  const { contractions } = contractionListManager;
+  console.log('mapStateToProps: contractions');
+  console.log(contractions);
+  return { contractions };
+};
+
+export default connect(mapStateToProps, {
+  handleContractionDeletePress
+})(ContractionCard);
