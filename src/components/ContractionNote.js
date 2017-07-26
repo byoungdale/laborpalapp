@@ -1,8 +1,13 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { Input, Item, Card, CardItem, Text, Button } from 'native-base';
+import { Input, Item, Card, CardItem, Text } from 'native-base';
+import { handleContractionNoteUpdate } from '../actions/ContractionListActions';
 
 class ContractionNote extends Component {
+  onTextInput(text) {
+    const contractionID = this.props.contractions.length;
+    this.props.handleContractionNoteUpdate(this.props.contractions, contractionID, text);
+  }
 
   render() {
     return (
@@ -12,21 +17,10 @@ class ContractionNote extends Component {
           <Item rounded>
             <Input
               placeholder='e.g. contractions are getting closer together!'
-              onChangeText={(input) => { console.log(input); }}
+              onChangeText={this.onTextInput.bind(this)}
+              value={this.props.note}
             />
           </Item>
-        </CardItem>
-        <CardItem>
-          <Button
-            transparent
-            style={{
-              position: 'absolute',
-              right: 0,
-              bottom: 0
-            }}
-          >
-            <Text>Save</Text>
-          </Button>
         </CardItem>
       </Card>
     );
@@ -39,4 +33,5 @@ const mapStateToProps = ({ contractionListManager }) => {
 };
 
 export default connect(mapStateToProps, {
+  handleContractionNoteUpdate
 })(ContractionNote);

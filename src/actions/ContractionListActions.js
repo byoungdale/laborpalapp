@@ -67,8 +67,13 @@ export const handleContractionRatingUpdate = (contractions, id, ratingName) => {
   };
 };
 
-export const handleContractionNoteUpdate = () => {
-
+export const handleContractionNoteUpdate = (contractions, id, note) => {
+  const newContractionsList = contractions.map((contraction) => {
+    return contraction.id === id ? { ...contraction, note } : contraction;
+  });
+  return (dispatch) => {
+    updateContraction(dispatch, newContractionsList);
+  };
 };
 
 export const showEncouragement = () => {
