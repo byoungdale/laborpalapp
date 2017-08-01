@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { handleStartPress, handleStopPress, handleAddingContraction } from './actions';
 import TimerCard from './components/TimerCard';
 import StartStopButton from './components/StartStopButton';
+import ContractionTimeLine from './components/ContractionTimeLine';
 
 class TimerSection extends Component {
   onStartPress() {
@@ -38,6 +39,7 @@ class TimerSection extends Component {
           />
           </Body>
         </View>
+        <ContractionTimeLine />
       </Content>
     );
   }

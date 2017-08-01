@@ -14,7 +14,7 @@ class ContractionNote extends Component {
       <Card>
         <CardItem header><Text>Leave a note</Text></CardItem>
         <CardItem>
-          <Item rounded>
+          <Item>
             <Input
               placeholder='e.g. contractions are getting closer together!'
               onChangeText={this.onTextInput.bind(this)}

@@ -6,7 +6,7 @@ import {
 } from 'native-base';
 import Timeline from 'react-native-timeline-listview';
 import ContractionCard from './ContractionCard';
-import { handleContractionDeletePress } from './actions/ContractionActions';
+import { handleContractionDeletePress } from '../actions/ContractionListActions';
 
 class ContractionList extends Component {
   listContractions() {

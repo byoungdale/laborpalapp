@@ -7,15 +7,13 @@ import {
   Icon,
   List,
   ListItem,
-  Left,
-  Right }
+}
 from 'native-base';
 import { connect } from 'react-redux';
 import { handleContractionDeletePress } from '../actions';
 import ContractionRatingSection from './ContractionRatingSection';
 import ContractionNote from './ContractionNote';
-
-const formatTime = require('minutes-seconds-milliseconds');
+import ContractionOverview from './ContractionOverview';
 
 class ContractionCard extends Component {
   onDeletePress() {
@@ -46,39 +44,16 @@ class ContractionCard extends Component {
           </CardItem>
         </CardItem>
         <List>
-          <ListItem icon>
-            <Left>
-              <Icon name="play" />
-            </Left>
-            <Right>
-              <Text>
-                {this.props.contraction.startStamp.toLocaleString()}
-              </Text>
-            </Right>
+          <ListItem>
+            <ContractionOverview contraction={this.props.contraction} />
           </ListItem>
-          <ListItem icon>
-            <Left>
-              <Icon name="hand" />
-            </Left>
-            <Right>
-              <Text>
-                {this.props.contraction.endStamp.toLocaleString()}
-              </Text>
-            </Right>
+          <ListItem>
+            <ContractionRatingSection />
           </ListItem>
-          <ListItem icon>
-            <Left>
-              <Icon name="clock" />
-            </Left>
-            <Right>
-              <Text>
-                {formatTime(this.props.contraction.timeElapsed)}
-              </Text>
-            </Right>
+          <ListItem>
+            <ContractionNote />
           </ListItem>
         </List>
-        <ContractionRatingSection />
-        <ContractionNote />
       </Card>
     );
   }
