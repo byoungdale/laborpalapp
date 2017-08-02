@@ -11,16 +11,11 @@ import Timeline from 'react-native-timeline-listview';
 
 class ContractionTimeLine extends Component {
   onEventPress(data) {
-    console.log('ContractionTimeLine: onEventPress: data');
-    console.log(data);
     const contractionID = data.title;
     const contractions = this.props.contractions;
-    console.log('ContractionTimeLine: onEventPress: contractions');
     const contraction = contractions.find((item) => {
       return item.id === contractionID ? item : null;
     });
-    console.log('ContractionTimeLine: onEventPress: contraction');
-    console.log(contraction);
     Actions.note({ contraction });
   }
 
@@ -114,8 +109,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = ({ contractionListManager }) => {
   const { timelinedata, contractions } = contractionListManager;
-  console.log('ContractionTimeLine: contractionListManager: timelinedata');
-  console.log(timelinedata);
   return { timelinedata, contractions };
 };
 
