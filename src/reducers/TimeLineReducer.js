@@ -1,13 +1,12 @@
 import {
-  UPDATE_TIMELINE,
-  SELECT_TIMELINE_ELEMENT
+  UPDATE_TIMELINE
 } from '../actions/types';
 
 const INITIAL_STATE = {
   timelinedata: [
     {
       time: '09:00',
-      title: 'Sample Contraction',
+      title: 'Example',
       description: 'Giving birth should be your greatest achivement. Not your greatest fear.\n - Jane Weideman',
       icon: require('../img/baby.png'),
     }

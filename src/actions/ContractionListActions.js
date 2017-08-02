@@ -6,16 +6,19 @@ import {
   UPDATE_CONTRACTION_LIST,
   UPDATE_TIMELINE
 } from './types';
+import ratings from '../img/ratings';
 
 const formatTime = require('minutes-seconds-milliseconds');
 
-export const addContraction = (dispatch, contraction, startStamp, newContractionsList, newTimeLineData) => {
+export const addContraction = (dispatch, contraction, startStamp, newContractionsList) => {
   dispatch({
     type: ADD_CONTRACTION,
     startStamp: new Date(),
     timeElapsed: new Date() - startStamp,
     contractions: newContractionsList
   });
+  console.log('addContraction: contraction');
+  console.log(contraction);
   Actions.note({ contraction });
 };
 
@@ -33,6 +36,14 @@ export const updateContraction = (dispatch, newContractionsList) => {
     type: UPDATE_CONTRACTION_LIST,
     contractions: newContractionsList
   });
+};
+
+export const updateTimeLine = (dispatch, timelinedata) => {
+  dispatch({
+    type: UPDATE_TIMELINE,
+    timelinedata
+  });
+  Actions.pop();
 };
 
 export const handleAddingContraction = (startStamp, timeElapsed, contractions) => {
@@ -81,4 +92,20 @@ export const handleContractionNoteUpdate = (contractions, id, note) => {
 
 export const showEncouragement = () => {
 
+};
+
+export const handleContractionSavePress = (newContractionsList) => {
+  return (dispatch) => {
+    const timelinedata = newContractionsList.map((contraction) => {
+      const finalRating = contraction.rating.toString();
+      const result = {
+        time: formatTime(contraction.timeElapsed),
+        title: contraction.id,
+        description: contraction.note,
+        icon: ratings[finalRating]
+      };
+      return result;
+    });
+    updateTimeLine(dispatch, timelinedata.reverse());
+  };
 };

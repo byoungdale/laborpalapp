@@ -1,14 +1,25 @@
 import {
   ADD_CONTRACTION,
   DELETE_CONTRACTION,
-  UPDATE_CONTRACTION_LIST
+  UPDATE_CONTRACTION_LIST,
+  UPDATE_TIMELINE
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  contractions: []
+  contractions: [],
+  timelinedata: [
+    {
+      time: '09:00',
+      title: 'Example',
+      description: 'Giving birth should be your greatest achivement. Not your greatest fear.\n - Jane Weideman',
+      icon: require('../img/baby.png'),
+    }
+  ]
 };
 
 export default (state = INITIAL_STATE, action) => {
+  console.log('ContractionListReducer: state');
+  console.log(state);
   switch (action.type) {
     case ADD_CONTRACTION:
       return {
@@ -24,6 +35,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         contractions: action.contractions
+      };
+    case UPDATE_TIMELINE:
+      return {
+        ...state,
+        timelinedata: action.timelinedata
       };
     default:
       return state;

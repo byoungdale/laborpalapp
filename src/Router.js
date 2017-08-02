@@ -9,13 +9,15 @@ const RouterComponent = () => {
       <Scene
         key="stopwatch"
         component={TimerSection}
-        title="StopWatch"
+        title="LaborPal"
+        renderBackButton={() => (null)}
         initial
       />
       <Scene
         key="note"
         component={ContractionSection}
-        title="Note"
+        title="Contraction Notepad"
+        renderBackButton={() => (null)}
       />
     </Router>
   );

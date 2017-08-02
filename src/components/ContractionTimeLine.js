@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import {
   StyleSheet,
   Text,
@@ -10,7 +11,17 @@ import Timeline from 'react-native-timeline-listview';
 
 class ContractionTimeLine extends Component {
   onEventPress(data) {
-    this.setState({ selected: data });
+    console.log('ContractionTimeLine: onEventPress: data');
+    console.log(data);
+    const contractionID = data.title;
+    const contractions = this.props.contractions;
+    console.log('ContractionTimeLine: onEventPress: contractions');
+    const contraction = contractions.find((item) => {
+      return item.id === contractionID ? item : null;
+    });
+    console.log('ContractionTimeLine: onEventPress: contraction');
+    console.log(contraction);
+    Actions.note({ contraction });
   }
 
   renderSelected() {
@@ -21,7 +32,7 @@ class ContractionTimeLine extends Component {
   }
 
   renderDetail(rowData, sectionID, rowID) {
-    const title = <Text style={[styles.title]}>{rowData.title}</Text>;
+    const title = <Text style={[styles.title]}>Contraction {rowData.title}</Text>;
     let desc = null;
     if (rowData.description) {
       desc = (
@@ -46,7 +57,7 @@ class ContractionTimeLine extends Component {
         {this.renderSelected.bind(this)}
         <Timeline
           style={styles.list}
-          data={this.props.timelinedata.timelinedata}
+          data={this.props.timelinedata}
           circleSize={20}
           circleColor='rgba(0,0,0,0)'
           lineColor='rgb(45,156,219)'
@@ -101,8 +112,11 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ timelinedata }) => {
-  return { timelinedata };
+const mapStateToProps = ({ contractionListManager }) => {
+  const { timelinedata, contractions } = contractionListManager;
+  console.log('ContractionTimeLine: contractionListManager: timelinedata');
+  console.log(timelinedata);
+  return { timelinedata, contractions };
 };
 
 export default connect(mapStateToProps)(ContractionTimeLine);

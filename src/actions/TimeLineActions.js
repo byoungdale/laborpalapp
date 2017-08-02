@@ -1,3 +1,5 @@
+import { Actions } from 'react-native-router-flux';
+
 import {
   UPDATE_TIMELINE
 } from './types';
@@ -10,6 +12,7 @@ export const updateTimeLine = (dispatch, timelinedata) => {
     type: UPDATE_TIMELINE,
     timelinedata
   });
+  Actions.pop();
 };
 
 export const handleContractionSavePress = (newContractionsList) => {
@@ -18,7 +21,7 @@ export const handleContractionSavePress = (newContractionsList) => {
       const finalRating = contraction.rating.toString();
       const result = {
         time: formatTime(contraction.timeElapsed),
-        title: `Contraction ${contraction.id}`,
+        title: contraction.id,
         description: contraction.note,
         icon: ratings[finalRating]
       };
