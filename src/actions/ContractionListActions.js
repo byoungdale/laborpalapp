@@ -3,10 +3,13 @@ import { Actions } from 'react-native-router-flux';
 import {
   DELETE_CONTRACTION,
   ADD_CONTRACTION,
-  UPDATE_CONTRACTION_LIST
+  UPDATE_CONTRACTION_LIST,
+  UPDATE_TIMELINE
 } from './types';
 
-export const addContraction = (dispatch, contraction, startStamp, newContractionsList) => {
+const formatTime = require('minutes-seconds-milliseconds');
+
+export const addContraction = (dispatch, contraction, startStamp, newContractionsList, newTimeLineData) => {
   dispatch({
     type: ADD_CONTRACTION,
     startStamp: new Date(),

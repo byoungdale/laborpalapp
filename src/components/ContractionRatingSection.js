@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Image } from 'react-native';
 import { Card, CardItem, Button, Body, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { handleContractionRatingUpdate } from '../actions/ContractionListActions';
+import ratings from '../img/ratings';
 
 const Emoji = require('react-native-emoji').default;
 
@@ -30,28 +32,105 @@ class ContractionRatingSection extends Component {
               transparent
               onPress={this.onRatingPress.bind(this, 'relaxed')}
             >
-              <Emoji name="relaxed" />
+              <Image
+                style={{
+                  alignSelf: 'center',
+                  height: 35,
+                  width: 35,
+                }}
+                source={ratings.relaxed}
+              />
             </Button>
-            <Button transparent>
-              <Emoji name="neutral_face" />
+            <Button
+              transparent
+              onPress={this.onRatingPress.bind(this, 'neutral_face')}
+            >
+              <Image
+                style={{
+                  alignSelf: 'center',
+                  height: 35,
+                  width: 35,
+                }}
+                source={ratings.neutral_face}
+              />
             </Button>
-            <Button transparent>
-              <Emoji name="sweat" />
+            <Button
+              transparent
+              onPress={this.onRatingPress.bind(this, 'sweat')}
+            >
+              <Image
+                style={{
+                  alignSelf: 'center',
+                  height: 35,
+                  width: 35,
+                }}
+                source={ratings.sweat}
+              />
             </Button>
-            <Button transparent>
-              <Emoji name="sleepy" />
+            <Button
+              transparent
+              onPress={this.onRatingPress.bind(this, 'sleepy')}
+            >
+              <Image
+                style={{
+                  alignSelf: 'center',
+                  height: 35,
+                  width: 35,
+                }}
+                source={ratings.sleepy}
+              />
             </Button>
-            <Button transparent>
-              <Emoji name="fearful" />
+            <Button
+              transparent
+              onPress={this.onRatingPress.bind(this, 'fearful')}
+            >
+              <Image
+                style={{
+                  alignSelf: 'center',
+                  height: 35,
+                  width: 35,
+                }}
+                source={ratings.fearful}
+              />
             </Button>
-            <Button transparent>
-              <Emoji name="sob" />
+            <Button
+              transparent
+              onPress={this.onRatingPress.bind(this, 'sob')}
+            >
+              <Image
+                style={{
+                  alignSelf: 'center',
+                  height: 35,
+                  width: 35,
+                }}
+                source={ratings.sob}
+              />
             </Button>
-            <Button transparent>
-              <Emoji name="triumph" />
+            <Button
+              transparent
+              onPress={this.onRatingPress.bind(this, 'triumph')}
+            >
+              <Image
+                style={{
+                  alignSelf: 'center',
+                  height: 35,
+                  width: 35,
+                }}
+                source={ratings.triumph}
+              />
             </Button>
-            <Button transparent>
-              <Emoji name="baby" />
+            <Button
+              transparent
+              onPress={this.onRatingPress.bind(this, 'baby')}
+            >
+              <Image
+                style={{
+                  alignSelf: 'center',
+                  height: 35,
+                  width: 35,
+                }}
+                source={ratings.baby}
+              />
             </Button>
           </Body>
         </CardItem>
@@ -61,9 +140,7 @@ class ContractionRatingSection extends Component {
 }
 
 const mapStateToProps = ({ contractionListManager }) => {
-  console.log('ContractionRating: mapStateToProps: contractions');
   const { contractions } = contractionListManager;
-  console.log(contractions);
   return { contractions };
 };
 

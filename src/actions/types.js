@@ -5,8 +5,9 @@ export const STOP_PRESS = 'stop_press';
 export const INCREMENT_TIME = 'increment_time';
 
 // TimelineActions
-export const OPEN_CONTRACTION_CARD = 'open_contraction_card';
+export const SELECT_TIMELINE_ELEMENT = 'select_timeline_element';
 export const SHOW_MORE_CONTRACTIONS = 'show_more_contractions';
+export const UPDATE_TIMELINE = 'update_timeline';
 export const RESET = 'reset';
 
 // ContractionListActions

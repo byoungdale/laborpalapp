@@ -60,8 +60,6 @@ class ContractionRow extends Component {
 
 const mapStateToProps = ({ contractionListManager }) => {
   const { contractions } = contractionListManager;
-  console.log('mapStateToProps: contractions');
-  console.log(contractions);
   return { contractions };
 };
 

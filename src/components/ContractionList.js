@@ -35,7 +35,6 @@ class ContractionList extends Component {
 
 const mapStateToProps = ({ timer }) => {
   const { contractions } = timer;
-
   return { contractions };
 };
 

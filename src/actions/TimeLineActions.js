@@ -1,6 +1,9 @@
 import {
   UPDATE_TIMELINE
 } from './types';
+import ratings from '../img/ratings';
+
+const formatTime = require('minutes-seconds-milliseconds');
 
 export const updateTimeLine = (dispatch, timelinedata) => {
   dispatch({
@@ -12,14 +15,15 @@ export const updateTimeLine = (dispatch, timelinedata) => {
 export const handleContractionSavePress = (newContractionsList) => {
   return (dispatch) => {
     const timelinedata = newContractionsList.map((contraction) => {
+      const finalRating = contraction.rating.toString();
       const result = {
-        time: contraction.timeElapsed,
-        title: `Contraction ${contraction.length}`,
+        time: formatTime(contraction.timeElapsed),
+        title: `Contraction ${contraction.id}`,
         description: contraction.note,
-        icon: contraction.rating
+        icon: ratings[finalRating]
       };
       return result;
     });
-    updateTimeLine(dispatch, timelinedata);
+    updateTimeLine(dispatch, timelinedata.reverse());
   };
 };
