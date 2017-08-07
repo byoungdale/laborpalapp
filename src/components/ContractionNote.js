@@ -5,7 +5,7 @@ import { handleContractionNoteUpdate } from '../actions/ContractionListActions';
 
 class ContractionNote extends Component {
   onTextInput(text) {
-    const contractionID = this.props.contractions.length;
+    const contractionID = this.props.contraction.id;
     this.props.handleContractionNoteUpdate(this.props.contractions, contractionID, text);
   }
 

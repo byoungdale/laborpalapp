@@ -9,7 +9,7 @@ const Emoji = require('react-native-emoji').default;
 
 class ContractionRatingSection extends Component {
   onRatingPress(ratingName) {
-    const contractionID = this.props.contractions.length;
+    const contractionID = this.props.contraction.id;
     this.props.handleContractionRatingUpdate(this.props.contractions, contractionID, ratingName);
   }
 

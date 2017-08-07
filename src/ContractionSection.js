@@ -7,6 +7,8 @@ import ContractionCard from './components/ContractionCard';
 
 class NoteSection extends Component {
   render() {
+    console.log('NoteSection: this.props.contraction');
+    console.log(this.props.contraction);
     return (
       <Container>
         <Content>

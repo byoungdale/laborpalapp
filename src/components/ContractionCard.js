@@ -37,8 +37,8 @@ class ContractionCard extends Component {
           <CardItem header><Text>Contraction {this.props.contraction.id}</Text></CardItem>
         </CardItem>
         <ContractionOverview contraction={this.props.contraction} />
-        <ContractionRatingSection />
-        <ContractionNote />
+        <ContractionRatingSection contraction={this.props.contraction} />
+        <ContractionNote contraction={this.props.contraction} />
         <CardItem
           style={{
             flex: 1,
