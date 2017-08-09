@@ -12,19 +12,14 @@ import Timeline from 'react-native-timeline-listview';
 class ContractionTimeLine extends Component {
   onEventPress(data) {
     const contractionID = data.title;
-    console.log('onEventPress: contractionID');
-    console.log(contractionID);
     const contractions = this.props.contractions;
     const contraction = contractions.find((item) => {
       return item.id === contractionID ? item : null;
     });
-    console.log('onEventPress: contaction');
-    console.log(contraction);
     Actions.note({ contraction });
   }
 
   renderSelected() {
-    console.log('renderSelected was run');
     if (this.props.selected) {
       return <Text style={{ marginTop: 10 }}>Selected event: {this.state.selected.title} at {this.state.selected.time}</Text>;
     }

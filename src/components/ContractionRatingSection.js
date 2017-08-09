@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import { handleContractionRatingUpdate } from '../actions/ContractionListActions';
 import ratings from '../img/ratings';
 
-const Emoji = require('react-native-emoji').default;
-
 class ContractionRatingSection extends Component {
   onRatingPress(ratingName) {
     const contractionID = this.props.contraction.id;
@@ -30,6 +28,7 @@ class ContractionRatingSection extends Component {
           >
             <Button
               transparent
+              style={this.props.contraction.rating === 'relaxed' ? styles.selected : styles.notselected}
               onPress={this.onRatingPress.bind(this, 'relaxed')}
             >
               <Image
@@ -43,6 +42,7 @@ class ContractionRatingSection extends Component {
             </Button>
             <Button
               transparent
+              style={this.props.contraction.rating === 'neutral_face' ? styles.selected : styles.notselected}
               onPress={this.onRatingPress.bind(this, 'neutral_face')}
             >
               <Image
@@ -56,6 +56,7 @@ class ContractionRatingSection extends Component {
             </Button>
             <Button
               transparent
+              style={this.props.contraction.rating === 'sweat' ? styles.selected : styles.notselected}
               onPress={this.onRatingPress.bind(this, 'sweat')}
             >
               <Image
@@ -69,6 +70,7 @@ class ContractionRatingSection extends Component {
             </Button>
             <Button
               transparent
+              style={this.props.contraction.rating === 'sleepy' ? styles.selected : styles.notselected}
               onPress={this.onRatingPress.bind(this, 'sleepy')}
             >
               <Image
@@ -82,6 +84,7 @@ class ContractionRatingSection extends Component {
             </Button>
             <Button
               transparent
+              style={this.props.contraction.rating === 'fearful' ? styles.selected : styles.notselected}
               onPress={this.onRatingPress.bind(this, 'fearful')}
             >
               <Image
@@ -95,6 +98,7 @@ class ContractionRatingSection extends Component {
             </Button>
             <Button
               transparent
+              style={this.props.contraction.rating === 'sob' ? styles.selected : styles.notselected}
               onPress={this.onRatingPress.bind(this, 'sob')}
             >
               <Image
@@ -108,6 +112,7 @@ class ContractionRatingSection extends Component {
             </Button>
             <Button
               transparent
+              style={this.props.contraction.rating === 'triumph' ? styles.selected : styles.notselected}
               onPress={this.onRatingPress.bind(this, 'triumph')}
             >
               <Image
@@ -121,6 +126,7 @@ class ContractionRatingSection extends Component {
             </Button>
             <Button
               transparent
+              style={this.props.contraction.rating === 'baby' ? styles.selected : styles.notselected}
               onPress={this.onRatingPress.bind(this, 'baby')}
             >
               <Image
@@ -138,6 +144,16 @@ class ContractionRatingSection extends Component {
     );
   }
 }
+
+const styles = {
+    selected: {
+      backgroundColor: 'red',
+    },
+    notselected: {
+      backgroundColor: 'blue',
+      width: 50,
+    }
+};
 
 const mapStateToProps = ({ contractionListManager }) => {
   const { contractions } = contractionListManager;

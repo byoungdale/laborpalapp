@@ -1,22 +1,32 @@
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {
   Container,
   Content
 } from 'native-base';
 import ContractionCard from './components/ContractionCard';
+import { handleContractionNoteUpdate } from './actions/ContractionListActions';
 
-class NoteSection extends Component {
+class ContractionSection extends Component {
   render() {
-    console.log('NoteSection: this.props.contraction');
-    console.log(this.props.contraction);
+    const result = this.props.contractions.find((element) => {
+        return element.id === this.props.contraction.id ? element : null;
+    });
     return (
       <Container>
         <Content>
-          <ContractionCard contraction={this.props.contraction} />
+          <ContractionCard contraction={result} />
         </Content>
       </Container>
     );
   }
 }
 
-export default NoteSection;
+const mapStateToProps = ({ contractionListManager }) => {
+  const { contractions } = contractionListManager;
+  return { contractions };
+};
+
+export default connect(mapStateToProps, {
+  handleContractionNoteUpdate
+})(ContractionSection);

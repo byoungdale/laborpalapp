@@ -17,8 +17,6 @@ export const addContraction = (dispatch, contraction, startStamp, newContraction
     timeElapsed: new Date() - startStamp,
     contractions: newContractionsList
   });
-  console.log('addContraction: contraction');
-  console.log(contraction);
   Actions.note({ contraction });
 };
 
@@ -73,10 +71,6 @@ export const handleContractionDeletePress = (contractions, id) => {
 };
 
 export const handleContractionRatingUpdate = (contractions, id, ratingName) => {
-  console.log('handleContractionRatingUpdate: id');
-  console.log(id);
-  console.log('handleContractionRatingUpdate: contractions');
-  console.log(contractions);
   const newContractionsList = contractions.map((contraction) => {
     return contraction.id === id ? { ...contraction, rating: ratingName } : contraction;
   });
@@ -101,11 +95,6 @@ export const showEncouragement = () => {
 export const handleContractionSavePress = (newContractionsList, contractionID) => {
   return (dispatch) => {
     const timelinedata = newContractionsList.map((contraction) => {
-      console.log('handleContractionSavePress: newContractionsList.map:');
-      console.log('contractionID');
-      console.log(contractionID);
-      console.log('contraction.id');
-      console.log(contraction.id);
       const finalRating = contraction.rating.toString();
       const result = {
         time: formatTime(contraction.timeElapsed),
