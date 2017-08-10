@@ -1,14 +1,14 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
 import ContractionSection from './ContractionSection';
-import TimerSection from './TimerSection';
+import MainView from './MainView';
 
 const RouterComponent = () => {
   return (
     <Router sceneStyle={{ paddingTop: 60 }}>
       <Scene
         key="stopwatch"
-        component={TimerSection}
+        component={MainView}
         title="LaborPal"
         renderBackButton={() => (null)}
         initial
