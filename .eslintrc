@@ -1,3 +1,6 @@
 {
-  "extends": "rallycoding"
+  "extends": "airbnb",
+  "rules": {
+    "func-names": ["error", "never"]
+  }
 }

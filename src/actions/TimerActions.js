@@ -4,33 +4,37 @@ import {
   INCREMENT_TIME
 } from './types';
 
+const formatTime = require('minutes-seconds-milliseconds');
+
 export const startTimer = (dispatch) => {
   dispatch({
     type: START_PRESS,
     running: true,
-    startStamp: new Date()
+    startStamp: new Date(),
+    timer: 0
   });
 };
 
-export const stopTimer = (dispatch, timeElapsed) => {
+export const stopTimer = (dispatch, startStamp) => {
   dispatch({
     type: STOP_PRESS,
-    timeElapsed
+    timeElapsed: 0,
+    endStamp: Date.now(),
+    timer: 0
   });
 };
 
 export const incrementTimer = (dispatch, startStamp) => {
   dispatch({
     type: INCREMENT_TIME,
-    timeElapsed: new Date() - startStamp
+    timer: Date.now() - startStamp
   });
 };
 
-export const handleStopPress = (timeElapsed) => {
+export const handleStopPress = (startStamp, callback) => {
   return (dispatch) => {
     this.clearInterval(this.interval);
-    stopTimer(dispatch, timeElapsed);
-    return;
+    stopTimer(dispatch, startStamp);
   };
 };
 

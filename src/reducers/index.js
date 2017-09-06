@@ -3,6 +3,6 @@ import TimerReducer from './TimerReducer';
 import ContractionListReducer from './ContractionListReducer';
 
 export default combineReducers({
-  timer: TimerReducer,
+  stopwatch: TimerReducer,
   contractionListManager: ContractionListReducer,
 });

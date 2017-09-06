@@ -10,11 +10,11 @@ import ratings from '../img/ratings';
 
 const formatTime = require('minutes-seconds-milliseconds');
 
-export const addContraction = (dispatch, contraction, startStamp, newContractionsList) => {
+export const addContraction = (dispatch, contraction, timeElapsed, startStamp, newContractionsList) => {
   dispatch({
     type: ADD_CONTRACTION,
     startStamp: new Date(),
-    timeElapsed: new Date() - startStamp,
+    timeElapsed,
     contractions: newContractionsList
   });
   Actions.note({ contraction });
@@ -48,7 +48,7 @@ export const handleAddingContraction = (startStamp, timeElapsed, contractions) =
   return (dispatch) => {
     const contraction = {
       id: contractions.length + 1,
-      timeElapsed,
+      timeElapsed: Date.now() - startStamp,
       startStamp,
       endStamp: new Date(),
       rating: null,
@@ -57,7 +57,7 @@ export const handleAddingContraction = (startStamp, timeElapsed, contractions) =
     };
     const newContractionsList = contractions.concat([contraction]);
     this.clearInterval(this.interval);
-    addContraction(dispatch, contraction, startStamp, newContractionsList);
+    addContraction(dispatch, contraction, timeElapsed, startStamp, newContractionsList);
   };
 };
 

@@ -14,14 +14,15 @@ class TimerSection extends Component {
 
   onStopPress() {
     const { timeElapsed, startStamp, contractions } = this.props;
-    this.props.handleStopPress(timeElapsed);
+    console.log(`TimerSection > onStopPress > timeElapsed: ${timeElapsed}`);
+    this.props.handleStopPress(startStamp);
     this.props.handleAddingContraction(startStamp, timeElapsed, contractions);
   }
 
   render() {
     return (
       <Content>
-        <TimerCard timeElapsed={this.props.timeElapsed} />
+        <TimerCard startStamp={this.props.startStamp} running={this.props.running} />
         <View>
           <Body
             style={{
@@ -45,11 +46,10 @@ class TimerSection extends Component {
   }
 }
 
-const mapStateToProps = ({ timer, contractionListManager }) => {
-  const { timeElapsed, startStamp, endStamp, running } = timer;
+const mapStateToProps = ({ stopwatch, contractionListManager }) => {
+  const { timeElapsed, startStamp, endStamp, running, timer } = stopwatch;
   const { contractions } = contractionListManager;
-
-  return { timeElapsed, startStamp, endStamp, running, contractions };
+  return { timeElapsed, startStamp, endStamp, timer, running, contractions };
 };
 
 export default connect(mapStateToProps, {
