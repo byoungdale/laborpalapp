@@ -147,11 +147,22 @@ class ContractionRatingSection extends Component {
 
 const styles = {
     selected: {
-      backgroundColor: 'red',
+      backgroundColor: '#f48c42',
+      paddingLeft: 3,
+      width: 100,
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'flex-start'
     },
     notselected: {
-      backgroundColor: 'blue',
-      width: 50,
+      backgroundColor: 'white',
+      paddingLeft: 3,
+      width: 100,
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'flex-start'
     }
 };
 
