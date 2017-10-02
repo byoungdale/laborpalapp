@@ -8,6 +8,7 @@
     "test:watch": "npm test -- --watch"
   },
   "dependencies": {
+    "expo": "^21.0.2",
     "minutes-seconds-milliseconds": "^1.0.3",
     "native-base": "2.2.1",
     "node-stopwatch": "0.0.1",

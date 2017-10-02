@@ -1,4 +1,7 @@
 {
-  "name": "LaborPal",
-  "displayName": "LaborPal"
+  "expo": {
+    "name": "LaborPal",
+    "slug": "LaborPal-app",
+    "sdkVersion": "1.0.0"
+  }
 }

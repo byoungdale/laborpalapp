@@ -14,7 +14,6 @@ class TimerSection extends Component {
 
   onStopPress() {
     const { timeElapsed, startStamp, contractions } = this.props;
-    console.log(`TimerSection > onStopPress > timeElapsed: ${timeElapsed}`);
     this.props.handleStopPress(startStamp);
     this.props.handleAddingContraction(startStamp, timeElapsed, contractions);
   }

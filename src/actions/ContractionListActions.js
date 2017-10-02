@@ -25,7 +25,6 @@ export const deleteContraction = (dispatch, newContractionsList) => {
     type: DELETE_CONTRACTION,
     contractions: newContractionsList
   });
-
   Actions.stopwatch();
 };
 

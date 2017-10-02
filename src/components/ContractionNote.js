@@ -18,7 +18,7 @@ class ContractionNote extends Component {
             <Input
               placeholder='e.g. contractions are getting closer together!'
               onChangeText={this.onTextInput.bind(this)}
-              value={this.props.note}
+              value={this.props.contraction.note}
               multiline={true}
             />
           </Item>
