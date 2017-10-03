@@ -19,8 +19,8 @@ import {
 
 class ContractionSection extends Component {
   onDeletePress() {
-    const { contractions, contraction } = this.props;
-    this.props.handleContractionDeletePress(contractions, contraction.id);
+    const { contractions, contraction, timelinedata } = this.props;
+    this.props.handleContractionDeletePress(contractions, timelinedata, contraction.id);
   }
 
   onSavePress() {
@@ -33,7 +33,15 @@ class ContractionSection extends Component {
         return element.id === this.props.contraction.id ? element : null;
     });
     if (!result) {
-      console.log('no contraction to load');
+      return (
+        <Container>
+          <Content>
+            <Text>
+              No Contractions to load yet.
+            </Text>
+          </Content>
+        </Container>
+      );
     }
     return (
       <Container>
@@ -68,8 +76,8 @@ class ContractionSection extends Component {
 }
 
 const mapStateToProps = ({ contractionListManager }) => {
-  const { contractions } = contractionListManager;
-  return { contractions };
+  const { contractions, timelinedata } = contractionListManager;
+  return { contractions, timelinedata };
 };
 
 export default connect(mapStateToProps, {

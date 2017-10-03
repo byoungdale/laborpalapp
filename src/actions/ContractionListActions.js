@@ -20,12 +20,13 @@ export const addContraction = (dispatch, contraction, timeElapsed, startStamp, n
   Actions.note({ contraction });
 };
 
-export const deleteContraction = (dispatch, newContractionsList) => {
+export const deleteContraction = (dispatch, newContractionsList, newTimelinedata) => {
   dispatch({
     type: DELETE_CONTRACTION,
-    contractions: newContractionsList
+    contractions: newContractionsList,
+    timelinedata: newTimelinedata
   });
-  Actions.stopwatch();
+  Actions.stopwatch({ type: 'reset' });
 };
 
 export const updateContraction = (dispatch, newContractionsList) => {
@@ -40,7 +41,7 @@ export const updateTimeLine = (dispatch, timelinedata) => {
     type: UPDATE_TIMELINE,
     timelinedata
   });
-  Actions.pop();
+  Actions.pop({ type: 'reset' });
 };
 
 export const handleAddingContraction = (startStamp, timeElapsed, contractions) => {
@@ -60,12 +61,30 @@ export const handleAddingContraction = (startStamp, timeElapsed, contractions) =
   };
 };
 
-export const handleContractionDeletePress = (contractions, id) => {
+export const handleContractionDeletePress = (contractions, timelinedata, id) => {
   const newContractionsList = contractions.filter((contraction) => {
-    return contraction.id !== id;
+    if (contraction.id > id) {
+      return contraction.id = contraction.id - 1;
+    } else if (contraction.id !== id) {
+      return contraction;
+    }
   });
+  const newTimelinedata = timelinedata.filter((contraction) => {
+    if (contraction.title > id) {
+      return contraction.title = contraction.title - 1;
+    } else if (contraction.title !== id) {
+      return contraction;
+    }
+  });
+  console.log('contractions versus newContractionsList');
+  console.log(contractions);
+  console.log(newContractionsList);
+
+  console.log('timelinedata versus newTimelinedata');
+  console.log(timelinedata);
+  console.log(newTimelinedata);
   return (dispatch) => {
-    deleteContraction(dispatch, newContractionsList);
+    deleteContraction(dispatch, newContractionsList, newTimelinedata);
   };
 };
 

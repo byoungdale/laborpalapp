@@ -27,7 +27,8 @@ export default (state = INITIAL_STATE, action) => {
     case DELETE_CONTRACTION:
       return {
         ...state,
-        contractions: action.contractions
+        contractions: action.contractions,
+        timelinedata: action.timelinedata
       };
     case UPDATE_CONTRACTION_LIST:
       return {
