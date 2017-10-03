@@ -76,13 +76,7 @@ export const handleContractionDeletePress = (contractions, timelinedata, id) => 
       return contraction;
     }
   });
-  console.log('contractions versus newContractionsList');
-  console.log(contractions);
-  console.log(newContractionsList);
-
-  console.log('timelinedata versus newTimelinedata');
-  console.log(timelinedata);
-  console.log(newTimelinedata);
+  
   return (dispatch) => {
     deleteContraction(dispatch, newContractionsList, newTimelinedata);
   };
