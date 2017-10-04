@@ -4,10 +4,6 @@ import { Card, CardItem, Button, Body, Text, View } from 'native-base';
 import { connect } from 'react-redux';
 const formatTime = require('minutes-seconds-milliseconds');
 
-// these functions needs to be put into a Action/reducers
-// in order to be able to compare the previous average to the new average
-// and then change the arrow from up/down red/green
-
 const calculateAverageFrequency = (contractionsList) => {
   const contractionsFilter = contractionsList.map((contraction, index) => {
     // check if this is a last contraction, if not, calculate
@@ -40,7 +36,25 @@ const calculateAverageLength = (contractionList) => {
   return averageLength;
 }
 
+const getLatestFrequency = (previousContraction, latestContraction) => {
+  console.log(previousContraction.startStamp);
+  console.log(latestContraction.startStamp);
+  const diff = latestContraction.startStamp.getTime() - previousContraction.startStamp.getTime();
+  return formatTime(diff);
+}
+
+const getLatestLength = (latestContraction) => {
+  const length = latestContraction.endStamp.getTime() - latestContraction.startStamp.getTime();
+  return formatTime(length);
+}
+
 const ContractionStats = (contractions) => {
+
+  // will use this function to compare previous state to current
+  // and then change the arrow to up or down and gree or red
+
+  // componentWillUpdate(nextProps, nextState)
+
   /*
     * The props will be contractions.
     * I need to use that to calculate the whether:
@@ -63,9 +77,13 @@ const ContractionStats = (contractions) => {
 
   const averageFrequency = contractionsList.length > 1 ? calculateAverageFrequency(contractionsList) : formatTime(0);
   const averageLength = contractionsList.length > 0 ? calculateAverageLength(contractionsList) : formatTime(0);
+  const latestContractionFrequency = contractionsList.length > 1 ? getLatestFrequency(contractionsList[contractionsList.length - 2], contractionsList[contractionsList.length - 1]) : formatTime(0);
+  const latestContractionLength = contractionsList.length > 0 ? getLatestLength(contractionsList[contractionsList.length - 1]) : formatTime(0);
 
   console.log(`averageFrequency: ${averageFrequency}`);
   console.log(`averageLength: ${averageLength}`);
+  console.log(`latestContractionLength: ${latestContractionLength}`);
+  console.log(`latestContractionFrequency: ${latestContractionFrequency}`);
 
   return (
     <View>
