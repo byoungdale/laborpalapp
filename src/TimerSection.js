@@ -10,6 +10,7 @@ import {
 import TimerCard from './components/TimerCard';
 import StartStopButton from './components/StartStopButton';
 import ContractionTimeLine from './components/ContractionTimeLine';
+import ContractionStats from './components/ContractionStats';
 
 class TimerSection extends Component {
   onStartPress() {
@@ -59,6 +60,7 @@ class TimerSection extends Component {
         >
           <Text>Reset</Text>
         </Button>
+        <ContractionStats contractions={this.props.contractions} />
         <ContractionTimeLine />
       </Content>
     );

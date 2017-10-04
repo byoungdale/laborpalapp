@@ -36,9 +36,37 @@ class ContractionSection extends Component {
       return (
         <Container>
           <Content>
-            <Text>
-              No Contractions to load yet.
+            <Text
+              style={{
+                flex: 1,
+                fontSize: 20,
+                textAlign: 'center',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              You have no contractions yet.
+
+              Time to get that baby out!
             </Text>
+            <Button
+              transparent
+              onPress={Actions.stopwatch}
+            >
+              <Text
+                style={{
+                  flex: 1,
+                  fontSize: 20,
+                  textAlign: 'center',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+              Head back to the timer
+            </Text>
+            </Button>
           </Content>
         </Container>
       );
