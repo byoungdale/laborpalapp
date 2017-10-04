@@ -4,7 +4,8 @@ import {
   DELETE_CONTRACTION,
   ADD_CONTRACTION,
   UPDATE_CONTRACTION_LIST,
-  UPDATE_TIMELINE
+  UPDATE_TIMELINE,
+  RESET_CONTRACTIONS
 } from './types';
 import ratings from '../img/ratings';
 
@@ -28,6 +29,12 @@ export const deleteContraction = (dispatch, newContractionsList, newTimelinedata
   });
   Actions.stopwatch({ type: 'reset' });
 };
+
+export const resetContractions = (dispatch) => {
+  dispatch({
+    type: RESET_CONTRACTIONS
+  });
+}
 
 export const updateContraction = (dispatch, newContractionsList) => {
   dispatch({
@@ -76,11 +83,15 @@ export const handleContractionDeletePress = (contractions, timelinedata, id) => 
       return contraction;
     }
   });
-  
+
   return (dispatch) => {
     deleteContraction(dispatch, newContractionsList, newTimelinedata);
   };
 };
+
+export const handleResetPress = () => {
+  return (dipatch) => { resetContractions(dipatch); };
+}
 
 export const handleContractionRatingUpdate = (contractions, id, ratingName) => {
   const newContractionsList = contractions.map((contraction) => {

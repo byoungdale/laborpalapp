@@ -15,6 +15,7 @@ export const RESET = 'reset';
 export const DELETE_CONTRACTION = 'delete_contraction';
 export const ADD_CONTRACTION = 'add_contraction';
 export const UPDATE_CONTRACTION_LIST = 'update_contraction_list';
+export const RESET_CONTRACTIONS = 'reset_contractions';
 
 //ContractionActions
 // implemented in ContractionActions.js

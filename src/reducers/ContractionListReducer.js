@@ -2,7 +2,8 @@ import {
   ADD_CONTRACTION,
   DELETE_CONTRACTION,
   UPDATE_CONTRACTION_LIST,
-  UPDATE_TIMELINE
+  UPDATE_TIMELINE,
+  RESET_CONTRACTIONS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -40,6 +41,8 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         timelinedata: action.timelinedata
       };
+    case RESET_CONTRACTIONS:
+      return INITIAL_STATE;
     default:
       return state;
   }

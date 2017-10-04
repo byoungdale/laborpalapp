@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import { Content, Body, View } from 'native-base';
+import { Content, Body, View, Button, Text } from 'native-base';
 import { connect } from 'react-redux';
-import { handleStartPress, handleStopPress, handleAddingContraction } from './actions';
+import {
+  handleStartPress,
+  handleStopPress,
+  handleAddingContraction,
+  handleResetPress
+} from './actions';
 import TimerCard from './components/TimerCard';
 import StartStopButton from './components/StartStopButton';
 import ContractionTimeLine from './components/ContractionTimeLine';
@@ -16,6 +21,10 @@ class TimerSection extends Component {
     const { timeElapsed, startStamp, contractions } = this.props;
     this.props.handleStopPress(startStamp);
     this.props.handleAddingContraction(startStamp, timeElapsed, contractions);
+  }
+
+  onResetPress() {
+    this.props.handleResetPress();
   }
 
   render() {
@@ -39,6 +48,17 @@ class TimerSection extends Component {
           />
           </Body>
         </View>
+        <Button
+          transparent
+          style={{
+            position: 'absolute',
+            right: 0,
+            top: 0
+          }}
+          onPress={this.onResetPress.bind(this)}
+        >
+          <Text>Reset</Text>
+        </Button>
         <ContractionTimeLine />
       </Content>
     );
@@ -47,12 +67,13 @@ class TimerSection extends Component {
 
 const mapStateToProps = ({ stopwatch, contractionListManager }) => {
   const { timeElapsed, startStamp, endStamp, running, timer } = stopwatch;
-  const { contractions } = contractionListManager;
-  return { timeElapsed, startStamp, endStamp, timer, running, contractions };
+  const { contractions, timelinedata } = contractionListManager;
+  return { timeElapsed, startStamp, endStamp, timer, running, contractions, timelinedata };
 };
 
 export default connect(mapStateToProps, {
   handleStartPress,
   handleStopPress,
-  handleAddingContraction
+  handleAddingContraction,
+  handleResetPress
 })(TimerSection);

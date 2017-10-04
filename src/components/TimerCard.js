@@ -28,16 +28,6 @@ const TimerCard = (props) => {
         alignItems: 'center',
       }}
     >
-      <Button
-        transparent
-        style={{
-          position: 'absolute',
-          right: 0,
-          top: 0
-        }}
-      >
-        <Text>Reset</Text>
-      </Button>
       <Time startStamp={props.startStamp} running={props.running} />
     </View>
   );
