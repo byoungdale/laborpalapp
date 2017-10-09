@@ -22,3 +22,6 @@ export const RESET_CONTRACTIONS = 'reset_contractions';
 export const UPDATE_CONTRACTION_RATING = 'update_contraction_rating';
 export const UPDATE_CONTRACTION_NOTE = 'update_contraction_note';
 export const SHOW_ENCOURAGEMENT = 'show_encouragement';
+
+//FrequencyLengthActions
+export const FREQUENCY_LENGTH = 'frequency_length';

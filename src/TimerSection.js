@@ -60,7 +60,7 @@ class TimerSection extends Component {
         >
           <Text>Reset</Text>
         </Button>
-        <ContractionStats contractions={this.props.contractions} />
+        <ContractionStats />
         <ContractionTimeLine />
       </Content>
     );

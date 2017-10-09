@@ -14,7 +14,8 @@ import ContractionCard from './components/ContractionCard';
 import {
   handleContractionDeletePress,
   handleContractionSavePress,
-  handleContractionNoteUpdate
+  handleContractionNoteUpdate,
+  handleFrequencyLengthCalculation
 } from './actions';
 
 class ContractionSection extends Component {
@@ -24,14 +25,16 @@ class ContractionSection extends Component {
   }
 
   onSavePress() {
-    const { contractions, contraction } = this.props;
+    const { contractions, contraction, frequency_length_values } = this.props;
     this.props.handleContractionSavePress(contractions, contraction.id);
+    this.props.handleFrequencyLengthCalculation(contractions, frequency_length_values);
   }
 
   render() {
     const result = this.props.contractions.find((element) => {
         return element.id === this.props.contraction.id ? element : null;
     });
+
     if (!result) {
       return (
         <Container>
@@ -103,13 +106,15 @@ class ContractionSection extends Component {
   }
 }
 
-const mapStateToProps = ({ contractionListManager }) => {
+const mapStateToProps = ({ contractionListManager, frequencyLengthManager }) => {
   const { contractions, timelinedata } = contractionListManager;
-  return { contractions, timelinedata };
+  const { frequency_length_values } = frequencyLengthManager;
+  return { contractions, timelinedata, frequency_length_values };
 };
 
 export default connect(mapStateToProps, {
   handleContractionNoteUpdate,
   handleContractionDeletePress,
-  handleContractionSavePress
+  handleContractionSavePress,
+  handleFrequencyLengthCalculation
 })(ContractionSection);
