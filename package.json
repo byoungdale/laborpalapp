@@ -1,19 +1,18 @@
 {
-  "name": "stopwatch",
-  "version": "0.0.1",
+  "name": "laborpalexpoapp",
+  "version": "0.0.0",
+  "description": "Hello Expo!",
+  "author": null,
   "private": true,
-  "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "test:watch": "npm test -- --watch"
-  },
+  "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
-    "expo": "^21.0.2",
+    "@expo/vector-icons": "^5.2.0",
+    "expo": "^21.0.0",
     "minutes-seconds-milliseconds": "^1.0.3",
     "native-base": "2.2.1",
     "node-stopwatch": "0.0.1",
     "react": "16.0.0-alpha.12",
-    "react-native": "0.46.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-21.0.2.tar.gz",
     "react-native-easy-grid": "^0.1.15",
     "react-native-emoji": "^1.2.0",
     "react-native-router-flux": "^3.40.1",
@@ -23,21 +22,5 @@
     "redux": "^3.7.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0"
-  },
-  "devDependencies": {
-    "babel-jest": "^20.0.1",
-    "babel-preset-react-native": "1.9.2",
-    "doctrine": "^2.0.0",
-    "eslint": "^4.5.0",
-    "eslint-config-airbnb": "^15.1.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.3.0",
-    "jest": "^20.0.1",
-    "jsx-ast-utils": "^2.0.0",
-    "react-test-renderer": "16.0.0-alpha.6"
-  },
-  "jest": {
-    "preset": "react-native"
   }
 }

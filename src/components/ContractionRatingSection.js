@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 import { Card, CardItem, Button, Body, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { handleContractionRatingUpdate } from '../actions/ContractionListActions';
-import ratings from '../img/ratings';
+import ratings from '../ratings';
 
 class ContractionRatingSection extends Component {
   onRatingPress(ratingName) {

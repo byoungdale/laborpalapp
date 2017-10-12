@@ -7,7 +7,7 @@ import {
   UPDATE_TIMELINE,
   RESET_CONTRACTIONS
 } from './types';
-import ratings from '../img/ratings';
+import ratings from '../ratings';
 
 const formatTime = require('minutes-seconds-milliseconds');
 

@@ -13,7 +13,7 @@ const INITIAL_STATE = {
       time: '09:00',
       title: 'Example',
       description: 'Giving birth should be your greatest achivement. Not your greatest fear.\n - Jane Weideman',
-      icon: require('../img/baby.png'),
+      icon: require('../../assets/icons/baby.png'),
     }
   ]
 };
