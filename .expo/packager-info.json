@@ -1,8 +1,8 @@
 {
   "expoServerPort": 19003,
   "packagerPort": 19004,
-  "packagerPid": 13262,
-  "expoServerNgrokUrl": "https://n7-h6x.byoungdale.laborpalexpoapp.exp.direct",
-  "packagerNgrokUrl": "https://packager.n7-h6x.byoungdale.laborpalexpoapp.exp.direct",
-  "ngrokPid": 13279
+  "packagerPid": 14002,
+  "expoServerNgrokUrl": "https://n7-h6x.byoungdale.laborpalapp.exp.direct",
+  "packagerNgrokUrl": "https://packager.n7-h6x.byoungdale.laborpalapp.exp.direct",
+  "ngrokPid": 14019
 }
