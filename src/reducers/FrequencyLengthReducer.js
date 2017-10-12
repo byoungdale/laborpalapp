@@ -18,6 +18,9 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
+  if (action.type === 'frequency_length') {
+    console.log(action);
+  }
   switch (action.type) {
     case FREQUENCY_LENGTH:
       return {

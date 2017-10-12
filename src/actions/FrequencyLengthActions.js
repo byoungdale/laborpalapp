@@ -34,9 +34,6 @@ export const handleFrequencyLengthCalculation = (contractionsList, frequency_len
       }
     }
 
-    console.log('handleFrequencyLengthCalculation');
-    console.log(frequency_length_new_state);
-
     finalCalculation(dispatch, frequency_length_new_state);
   };
 }
