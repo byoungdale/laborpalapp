@@ -1,0 +1,25 @@
+{
+  "name": "laborpalexpoapp",
+  "version": "0.0.0",
+  "description": "Hello Expo!",
+  "author": null,
+  "private": true,
+  "main": "node_modules/expo/AppEntry.js",
+  "dependencies": {
+    "@expo/vector-icons": "^5.2.0",
+    "expo": "^21.0.0",
+    "minutes-seconds-milliseconds": "^1.0.3",
+    "native-base": "2.2.1",
+    "node-stopwatch": "0.0.1",
+    "react": "16.0.0-alpha.12",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-21.0.2.tar.gz",
+    "react-native-easy-grid": "^0.1.15",
+    "react-native-emoji": "^1.2.0",
+    "react-native-router-flux": "^3.40.1",
+    "react-native-swipeout": "^2.1.2",
+    "react-native-timeline-listview": "^0.2.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.0",
+    "redux-thunk": "^2.2.0"
+  }
+}
